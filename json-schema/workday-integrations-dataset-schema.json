@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://community.workday.com/schemas/workday-integrations/dataset.json",
+  "title": "Workday Prism Analytics Dataset",
+  "description": "Represents a Prism Analytics dataset in Workday, used for loading external data into Workday for advanced reporting and analytics. Datasets have defined schemas and go through draft, upload, and publish lifecycle stages.",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID of the dataset"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the dataset",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the dataset"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Draft", "Published", "Publishing", "Failed"],
+      "description": "Current lifecycle status of the dataset"
+    },
+    "rowCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of rows in the published dataset"
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the dataset was created"
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the dataset was last modified"
+    },
+    "publishedDate": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "When the dataset was last published"
+    },
+    "schema": {
+      "type": "array",
+      "description": "Field definitions for the dataset",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/FieldDefinition"
+      }
+    }
+  },
+  "$defs": {
+    "FieldDefinition": {
+      "type": "object",
+      "description": "Defines a field/column in a Prism Analytics dataset",
+      "required": ["name", "type"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Field name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Field description"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["Text", "Numeric", "Date", "Boolean", "Currency"],
+          "description": "Data type of the field"
+        },
+        "precision": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Decimal precision for numeric fields"
+        },
+        "isRequired": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the field is required"
+        }
+      }
+    }
+  }
+}

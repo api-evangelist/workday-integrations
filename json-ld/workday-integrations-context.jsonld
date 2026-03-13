@@ -1,0 +1,227 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "workday": "https://community.workday.com/schemas/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Worker": {
+      "@id": "workday:Worker",
+      "@context": {
+        "descriptor": "schema:name",
+        "workerType": "workday:workerType",
+        "personalData": "workday:personalData",
+        "employmentData": "workday:employmentData",
+        "contactData": "workday:contactData",
+        "hireDate": {
+          "@id": "workday:hireDate",
+          "@type": "xsd:date"
+        },
+        "terminationDate": {
+          "@id": "workday:terminationDate",
+          "@type": "xsd:date"
+        },
+        "workerStatus": "workday:workerStatus",
+        "primaryWorkEmail": "schema:email",
+        "primaryWorkPhone": "schema:telephone"
+      }
+    },
+
+    "Organization": {
+      "@id": "workday:Organization",
+      "@context": {
+        "descriptor": "schema:name",
+        "organizationType": "workday:organizationType",
+        "organizationCode": "workday:organizationCode",
+        "isActive": {
+          "@id": "workday:isActive",
+          "@type": "xsd:boolean"
+        },
+        "manager": "workday:manager",
+        "superiorOrganization": "workday:superiorOrganization",
+        "subordinateOrganizations": "workday:subordinateOrganizations"
+      }
+    },
+
+    "Position": {
+      "@id": "workday:Position",
+      "@context": {
+        "descriptor": "schema:name",
+        "positionId": "workday:positionId",
+        "isFilled": {
+          "@id": "workday:isFilled",
+          "@type": "xsd:boolean"
+        },
+        "worker": "workday:worker",
+        "jobProfile": "workday:jobProfile",
+        "supervisoryOrganization": "workday:supervisoryOrganization",
+        "location": "schema:location",
+        "availableDate": {
+          "@id": "workday:availableDate",
+          "@type": "xsd:date"
+        }
+      }
+    },
+
+    "JobProfile": {
+      "@id": "workday:JobProfile",
+      "@context": {
+        "descriptor": "schema:name",
+        "jobCode": "workday:jobCode",
+        "jobFamily": "workday:jobFamily",
+        "managementLevel": "workday:managementLevel",
+        "jobCategory": "workday:jobCategory",
+        "isActive": {
+          "@id": "workday:isActive",
+          "@type": "xsd:boolean"
+        },
+        "jobDescription": "schema:description"
+      }
+    },
+
+    "Compensation": {
+      "@id": "workday:Compensation",
+      "@context": {
+        "worker": "workday:worker",
+        "effectiveDate": {
+          "@id": "workday:effectiveDate",
+          "@type": "xsd:date"
+        },
+        "totalBasePayAnnualized": {
+          "@id": "workday:totalBasePayAnnualized",
+          "@type": "xsd:decimal"
+        },
+        "currency": "workday:currency",
+        "compensationGrade": "workday:compensationGrade",
+        "compensationStep": "workday:compensationStep"
+      }
+    },
+
+    "BenefitEnrollment": {
+      "@id": "workday:BenefitEnrollment",
+      "@context": {
+        "benefitPlan": "workday:benefitPlan",
+        "coverageLevel": "workday:coverageLevel",
+        "coverageBeginDate": {
+          "@id": "workday:coverageBeginDate",
+          "@type": "xsd:date"
+        },
+        "coverageEndDate": {
+          "@id": "workday:coverageEndDate",
+          "@type": "xsd:date"
+        },
+        "employeeCost": {
+          "@id": "workday:employeeCost",
+          "@type": "xsd:decimal"
+        },
+        "employerCost": {
+          "@id": "workday:employerCost",
+          "@type": "xsd:decimal"
+        }
+      }
+    },
+
+    "TimeOffPlan": {
+      "@id": "workday:TimeOffPlan",
+      "@context": {
+        "timeOffPlan": "workday:timeOffPlan",
+        "balance": {
+          "@id": "workday:balance",
+          "@type": "xsd:decimal"
+        },
+        "accrued": {
+          "@id": "workday:accrued",
+          "@type": "xsd:decimal"
+        },
+        "used": {
+          "@id": "workday:used",
+          "@type": "xsd:decimal"
+        },
+        "unit": "workday:unit",
+        "asOfDate": {
+          "@id": "workday:asOfDate",
+          "@type": "xsd:date"
+        }
+      }
+    },
+
+    "JobRequisition": {
+      "@id": "workday:JobRequisition",
+      "@context": {
+        "descriptor": "schema:name",
+        "requisitionNumber": "workday:requisitionNumber",
+        "status": "workday:requisitionStatus",
+        "jobProfile": "workday:jobProfile",
+        "numberOfOpenings": {
+          "@id": "workday:numberOfOpenings",
+          "@type": "xsd:integer"
+        },
+        "targetHireDate": {
+          "@id": "workday:targetHireDate",
+          "@type": "xsd:date"
+        },
+        "createdDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:date"
+        },
+        "hiringManager": "workday:hiringManager"
+      }
+    },
+
+    "BusinessProcess": {
+      "@id": "workday:BusinessProcess",
+      "@context": {
+        "descriptor": "schema:name",
+        "businessProcessType": "workday:businessProcessType",
+        "status": "workday:processStatus",
+        "initiatedDate": {
+          "@id": "workday:initiatedDate",
+          "@type": "xsd:dateTime"
+        },
+        "completedDate": {
+          "@id": "workday:completedDate",
+          "@type": "xsd:dateTime"
+        },
+        "initiator": "workday:initiator",
+        "subject": "workday:subject",
+        "currentStep": "workday:currentStep"
+      }
+    },
+
+    "Dataset": {
+      "@id": "workday:Dataset",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "status": "workday:datasetStatus",
+        "rowCount": {
+          "@id": "workday:rowCount",
+          "@type": "xsd:integer"
+        },
+        "createdDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modifiedDate": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "publishedDate": {
+          "@id": "workday:publishedDate",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "PayGroup": {
+      "@id": "workday:PayGroup",
+      "@context": {
+        "descriptor": "schema:name",
+        "payFrequency": "workday:payFrequency",
+        "country": "workday:country",
+        "currency": "workday:currency"
+      }
+    }
+  }
+}

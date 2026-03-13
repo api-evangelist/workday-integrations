@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://community.workday.com/schemas/workday-integrations/position.json",
+  "title": "Workday Position",
+  "description": "Represents a position in Workday, defining a specific role within an organization that can be filled by a worker. Positions are linked to job profiles and supervisory organizations.",
+  "type": "object",
+  "required": ["id", "descriptor"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID of the position"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Display name of the position"
+    },
+    "positionId": {
+      "type": "string",
+      "description": "Position ID code"
+    },
+    "isFilled": {
+      "type": "boolean",
+      "description": "Whether the position is currently filled by a worker"
+    },
+    "worker": {
+      "$ref": "#/$defs/Reference"
+    },
+    "jobProfile": {
+      "$ref": "#/$defs/Reference"
+    },
+    "supervisoryOrganization": {
+      "$ref": "#/$defs/Reference"
+    },
+    "location": {
+      "$ref": "#/$defs/Reference"
+    },
+    "availableDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the position became or becomes available"
+    }
+  },
+  "$defs": {
+    "Reference": {
+      "type": "object",
+      "description": "Reference to a Workday business object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Workday ID of the referenced object"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Display name of the referenced object"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri",
+          "description": "API URL for the referenced resource"
+        }
+      }
+    }
+  }
+}

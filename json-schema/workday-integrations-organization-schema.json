@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://community.workday.com/schemas/workday-integrations/organization.json",
+  "title": "Workday Organization",
+  "description": "Represents an organization in Workday, including supervisory organizations, cost centers, companies, regions, and custom organization types that form the organizational hierarchy.",
+  "type": "object",
+  "required": ["id", "descriptor", "organizationType"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID of the organization"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Display name of the organization"
+    },
+    "organizationType": {
+      "type": "string",
+      "enum": ["Supervisory", "Cost_Center", "Company", "Region", "Custom"],
+      "description": "Type of organization"
+    },
+    "organizationCode": {
+      "type": "string",
+      "description": "Organization reference code"
+    },
+    "isActive": {
+      "type": "boolean",
+      "description": "Whether the organization is currently active"
+    },
+    "manager": {
+      "$ref": "#/$defs/Reference"
+    },
+    "superiorOrganization": {
+      "$ref": "#/$defs/Reference"
+    },
+    "subordinateOrganizations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Reference"
+      },
+      "description": "Child organizations in the hierarchy"
+    }
+  },
+  "$defs": {
+    "Reference": {
+      "type": "object",
+      "description": "Reference to a Workday business object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Workday ID of the referenced object"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Display name of the referenced object"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri",
+          "description": "API URL for the referenced resource"
+        }
+      }
+    }
+  }
+}

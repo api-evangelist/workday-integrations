@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://community.workday.com/schemas/workday-integrations/worker.json",
+  "title": "Workday Worker",
+  "description": "Represents a worker in Workday, including employees and contingent workers, with personal data, employment details, job information, and organizational assignments.",
+  "type": "object",
+  "required": ["id", "descriptor", "workerType"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Workday ID of the worker"
+    },
+    "descriptor": {
+      "type": "string",
+      "description": "Display name of the worker"
+    },
+    "workerType": {
+      "type": "string",
+      "enum": ["Employee", "Contingent_Worker"],
+      "description": "Type of worker"
+    },
+    "personalData": {
+      "$ref": "#/$defs/PersonalData"
+    },
+    "employmentData": {
+      "$ref": "#/$defs/EmploymentData"
+    },
+    "contactData": {
+      "$ref": "#/$defs/ContactData"
+    }
+  },
+  "$defs": {
+    "PersonalData": {
+      "type": "object",
+      "description": "Personal information about the worker",
+      "properties": {
+        "legalName": {
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "description": "Legal first name"
+            },
+            "lastName": {
+              "type": "string",
+              "description": "Legal last name"
+            },
+            "middleName": {
+              "type": "string",
+              "description": "Legal middle name"
+            }
+          },
+          "required": ["firstName", "lastName"]
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of birth"
+        },
+        "gender": {
+          "type": "string",
+          "description": "Gender identity"
+        },
+        "nationality": {
+          "type": "string",
+          "description": "Nationality or citizenship"
+        }
+      }
+    },
+    "EmploymentData": {
+      "type": "object",
+      "description": "Employment details for the worker",
+      "properties": {
+        "hireDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Original hire date"
+        },
+        "terminationDate": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "Termination date if applicable"
+        },
+        "workerStatus": {
+          "type": "string",
+          "enum": ["Active", "Terminated", "On_Leave"],
+          "description": "Current employment status"
+        },
+        "employeeType": {
+          "type": "string",
+          "description": "Employee type classification"
+        },
+        "jobData": {
+          "$ref": "#/$defs/JobData"
+        }
+      }
+    },
+    "JobData": {
+      "type": "object",
+      "description": "Current job assignment details",
+      "properties": {
+        "jobTitle": {
+          "type": "string",
+          "description": "Current job title"
+        },
+        "businessTitle": {
+          "type": "string",
+          "description": "Business title"
+        },
+        "jobProfile": {
+          "$ref": "#/$defs/Reference"
+        },
+        "position": {
+          "$ref": "#/$defs/Reference"
+        },
+        "location": {
+          "$ref": "#/$defs/Reference"
+        },
+        "supervisoryOrganization": {
+          "$ref": "#/$defs/Reference"
+        },
+        "managementLevel": {
+          "$ref": "#/$defs/Reference"
+        }
+      }
+    },
+    "ContactData": {
+      "type": "object",
+      "description": "Contact information for the worker",
+      "properties": {
+        "primaryWorkEmail": {
+          "type": "string",
+          "format": "email",
+          "description": "Primary work email"
+        },
+        "primaryWorkPhone": {
+          "type": "string",
+          "description": "Primary work phone number"
+        },
+        "businessAddress": {
+          "$ref": "#/$defs/Address"
+        }
+      }
+    },
+    "Address": {
+      "type": "object",
+      "description": "Physical address",
+      "properties": {
+        "line1": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        }
+      }
+    },
+    "Reference": {
+      "type": "object",
+      "description": "Reference to a Workday business object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Workday ID of the referenced object"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Display name of the referenced object"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri",
+          "description": "API URL for the referenced resource"
+        }
+      }
+    }
+  }
+}

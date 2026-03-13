@@ -1,0 +1,1126 @@
+openapi: 3.1.0
+info:
+  title: Workday REST API
+  description: >-
+    Modern REST API for accessing Workday business objects including workers,
+    organizations, positions, jobs, compensation, benefits, time off, and more.
+    Provides programmatic access to Workday data using standard HTTP methods
+    with JSON payloads and OAuth 2.0 authentication.
+  version: v1
+  contact:
+    name: Workday Support
+    email: support@workday.com
+    url: https://www.workday.com/en-us/customer-experience/support.html
+  termsOfService: https://www.workday.com/en-us/legal.html
+externalDocs:
+  description: Workday REST API Documentation
+  url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+servers:
+  - url: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+    description: Workday Implementation Services
+    variables:
+      tenant:
+        default: mycompany
+        description: Workday tenant name
+tags:
+  - name: Workers
+    description: Access and manage worker records including employees and contingent workers
+  - name: Organizations
+    description: Retrieve and manage organizational structures and hierarchies
+  - name: Job Profiles
+    description: Access job profile definitions and configurations
+  - name: Positions
+    description: Manage position records and staffing
+  - name: Compensation
+    description: Access compensation plans and worker compensation data
+  - name: Benefits
+    description: Access benefit plans and worker benefit enrollments
+  - name: Time Off
+    description: Manage time off requests and balances
+  - name: Payroll
+    description: Access payroll data and pay group configurations
+  - name: Recruiting
+    description: Manage job requisitions and candidate applications
+  - name: Business Processes
+    description: Interact with Workday business process workflows
+security:
+  - bearerAuth: []
+paths:
+  /workers:
+    get:
+      operationId: listWorkers
+      summary: List workers
+      description: >-
+        Retrieve a collection of workers. Returns employees and contingent
+        workers with their basic profile information. Supports pagination,
+        filtering, and field selection.
+      tags:
+        - Workers
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Collection of workers returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    description: Total number of matching workers
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WorkerSummary'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /workers/{workerId}:
+    get:
+      operationId: getWorker
+      summary: Get a worker
+      description: >-
+        Retrieve detailed information about a specific worker by their Workday
+        ID, including personal data, employment details, and organizational
+        assignments.
+      tags:
+        - Workers
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+      responses:
+        '200':
+          description: Worker details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Worker'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{workerId}/history:
+    get:
+      operationId: getWorkerHistory
+      summary: Get worker history
+      description: >-
+        Retrieve the employment history for a specific worker, including job
+        changes, promotions, transfers, and organizational moves.
+      tags:
+        - Workers
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+      responses:
+        '200':
+          description: Worker history returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WorkerHistoryEntry'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{workerId}/timeOffPlans:
+    get:
+      operationId: getWorkerTimeOffPlans
+      summary: Get worker time off plans
+      description: >-
+        Retrieve time off plans and balances for a specific worker, including
+        accrued, used, and available balances.
+      tags:
+        - Time Off
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+      responses:
+        '200':
+          description: Time off plans returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TimeOffPlan'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{workerId}/compensation:
+    get:
+      operationId: getWorkerCompensation
+      summary: Get worker compensation
+      description: >-
+        Retrieve compensation details for a specific worker, including base pay,
+        allowances, bonuses, and total compensation.
+      tags:
+        - Compensation
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+      responses:
+        '200':
+          description: Compensation details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompensationDetail'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /workers/{workerId}/benefits:
+    get:
+      operationId: getWorkerBenefits
+      summary: Get worker benefit enrollments
+      description: >-
+        Retrieve benefit enrollment details for a specific worker, including
+        health, dental, vision, life insurance, and retirement plans.
+      tags:
+        - Benefits
+      parameters:
+        - $ref: '#/components/parameters/workerId'
+      responses:
+        '200':
+          description: Benefit enrollments returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BenefitEnrollment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /organizations:
+    get:
+      operationId: listOrganizations
+      summary: List organizations
+      description: >-
+        Retrieve a collection of organizations including supervisory, cost
+        center, company, region, and custom organization types.
+      tags:
+        - Organizations
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+        - name: type
+          in: query
+          description: Filter by organization type
+          schema:
+            type: string
+            enum:
+              - Supervisory
+              - Cost_Center
+              - Company
+              - Region
+              - Custom
+      responses:
+        '200':
+          description: Collection of organizations returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Organization'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /organizations/{organizationId}:
+    get:
+      operationId: getOrganization
+      summary: Get an organization
+      description: >-
+        Retrieve detailed information about a specific organization by ID,
+        including its type, hierarchy, and manager.
+      tags:
+        - Organizations
+      parameters:
+        - $ref: '#/components/parameters/organizationId'
+      responses:
+        '200':
+          description: Organization details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /organizations/{organizationId}/workers:
+    get:
+      operationId: listOrganizationWorkers
+      summary: List workers in an organization
+      description: >-
+        Retrieve workers assigned to a specific organization.
+      tags:
+        - Organizations
+        - Workers
+      parameters:
+        - $ref: '#/components/parameters/organizationId'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Workers in the organization returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WorkerSummary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /jobProfiles:
+    get:
+      operationId: listJobProfiles
+      summary: List job profiles
+      description: >-
+        Retrieve a collection of job profile definitions configured in the
+        Workday tenant, including job families and management levels.
+      tags:
+        - Job Profiles
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Collection of job profiles returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/JobProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /jobProfiles/{jobProfileId}:
+    get:
+      operationId: getJobProfile
+      summary: Get a job profile
+      description: >-
+        Retrieve details of a specific job profile by ID.
+      tags:
+        - Job Profiles
+      parameters:
+        - name: jobProfileId
+          in: path
+          required: true
+          description: Workday ID of the job profile
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job profile details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /positions:
+    get:
+      operationId: listPositions
+      summary: List positions
+      description: >-
+        Retrieve a collection of position records, including filled and
+        unfilled positions with their associated job profiles.
+      tags:
+        - Positions
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Collection of positions returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Position'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /positions/{positionId}:
+    get:
+      operationId: getPosition
+      summary: Get a position
+      description: >-
+        Retrieve details of a specific position by ID, including the
+        assigned worker and job profile.
+      tags:
+        - Positions
+      parameters:
+        - name: positionId
+          in: path
+          required: true
+          description: Workday ID of the position
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Position details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /payGroups:
+    get:
+      operationId: listPayGroups
+      summary: List pay groups
+      description: >-
+        Retrieve a collection of pay groups configured in the tenant.
+      tags:
+        - Payroll
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Collection of pay groups returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PayGroup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /jobRequisitions:
+    get:
+      operationId: listJobRequisitions
+      summary: List job requisitions
+      description: >-
+        Retrieve a collection of job requisitions for open positions.
+      tags:
+        - Recruiting
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Collection of job requisitions returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/JobRequisition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /jobRequisitions/{jobRequisitionId}:
+    get:
+      operationId: getJobRequisition
+      summary: Get a job requisition
+      description: >-
+        Retrieve details of a specific job requisition by ID.
+      tags:
+        - Recruiting
+      parameters:
+        - name: jobRequisitionId
+          in: path
+          required: true
+          description: Workday ID of the job requisition
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job requisition details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobRequisition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /businessProcesses:
+    get:
+      operationId: listBusinessProcesses
+      summary: List business processes
+      description: >-
+        Retrieve active business process instances, including approval
+        workflows and their current status.
+      tags:
+        - Business Processes
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+        - name: status
+          in: query
+          description: Filter by process status
+          schema:
+            type: string
+            enum:
+              - InProgress
+              - Completed
+              - Cancelled
+              - Denied
+      responses:
+        '200':
+          description: Collection of business processes returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BusinessProcess'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /businessProcesses/{processId}:
+    get:
+      operationId: getBusinessProcess
+      summary: Get a business process
+      description: >-
+        Retrieve details and current status of a specific business process
+        instance by ID.
+      tags:
+        - Business Processes
+      parameters:
+        - name: processId
+          in: path
+          required: true
+          description: Workday ID of the business process instance
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Business process details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessProcess'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        OAuth 2.0 bearer token obtained via authorization code grant or
+        client credentials grant through Workday authentication endpoints.
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    search:
+      name: search
+      in: query
+      description: Search string to filter results
+      schema:
+        type: string
+    workerId:
+      name: workerId
+      in: path
+      required: true
+      description: Workday ID of the worker
+      schema:
+        type: string
+    organizationId:
+      name: organizationId
+      in: path
+      required: true
+      description: Workday ID of the organization
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Insufficient permissions for the requested resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Requested resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    WorkerSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the worker
+        descriptor:
+          type: string
+          description: Display name of the worker
+        href:
+          type: string
+          format: uri
+          description: API URL for the worker resource
+        primaryWorkEmail:
+          type: string
+          format: email
+          description: Primary work email address
+    Worker:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the worker
+        descriptor:
+          type: string
+          description: Display name of the worker
+        workerType:
+          type: string
+          enum:
+            - Employee
+            - Contingent_Worker
+          description: Type of worker
+        personalData:
+          type: object
+          properties:
+            legalName:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  description: Legal first name
+                lastName:
+                  type: string
+                  description: Legal last name
+                middleName:
+                  type: string
+                  description: Legal middle name
+            dateOfBirth:
+              type: string
+              format: date
+              description: Date of birth
+            gender:
+              type: string
+              description: Gender identity
+            nationality:
+              type: string
+              description: Nationality / citizenship
+        employmentData:
+          type: object
+          properties:
+            hireDate:
+              type: string
+              format: date
+              description: Original hire date
+            terminationDate:
+              type: string
+              format: date
+              description: Termination date if applicable
+            workerStatus:
+              type: string
+              enum:
+                - Active
+                - Terminated
+                - On_Leave
+              description: Current employment status
+            employeeType:
+              type: string
+              description: Employee type classification
+            jobData:
+              type: object
+              properties:
+                jobTitle:
+                  type: string
+                  description: Current job title
+                jobProfile:
+                  $ref: '#/components/schemas/Reference'
+                position:
+                  $ref: '#/components/schemas/Reference'
+                businessTitle:
+                  type: string
+                  description: Business title
+                location:
+                  $ref: '#/components/schemas/Reference'
+                supervisoryOrganization:
+                  $ref: '#/components/schemas/Reference'
+                managementLevel:
+                  $ref: '#/components/schemas/Reference'
+                workerType:
+                  type: string
+                  description: Worker sub-type
+        contactData:
+          type: object
+          properties:
+            primaryWorkEmail:
+              type: string
+              format: email
+              description: Primary work email
+            primaryWorkPhone:
+              type: string
+              description: Primary work phone number
+            businessAddress:
+              type: object
+              properties:
+                line1:
+                  type: string
+                line2:
+                  type: string
+                city:
+                  type: string
+                state:
+                  type: string
+                postalCode:
+                  type: string
+                country:
+                  type: string
+    WorkerHistoryEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          description: History entry identifier
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date of the change
+        eventType:
+          type: string
+          description: Type of employment event
+        descriptor:
+          type: string
+          description: Description of the change
+        previousValue:
+          type: string
+          description: Previous value before the change
+        newValue:
+          type: string
+          description: New value after the change
+    Organization:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the organization
+        descriptor:
+          type: string
+          description: Display name of the organization
+        organizationType:
+          type: string
+          enum:
+            - Supervisory
+            - Cost_Center
+            - Company
+            - Region
+            - Custom
+          description: Type of organization
+        organizationCode:
+          type: string
+          description: Organization reference code
+        isActive:
+          type: boolean
+          description: Whether the organization is active
+        manager:
+          $ref: '#/components/schemas/Reference'
+        superiorOrganization:
+          $ref: '#/components/schemas/Reference'
+        subordinateOrganizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reference'
+          description: Child organizations in the hierarchy
+    JobProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the job profile
+        descriptor:
+          type: string
+          description: Display name of the job profile
+        jobCode:
+          type: string
+          description: Job code identifier
+        jobFamily:
+          $ref: '#/components/schemas/Reference'
+        managementLevel:
+          $ref: '#/components/schemas/Reference'
+        jobCategory:
+          $ref: '#/components/schemas/Reference'
+        isActive:
+          type: boolean
+          description: Whether the job profile is active
+        jobDescription:
+          type: string
+          description: Full job description text
+    Position:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the position
+        descriptor:
+          type: string
+          description: Display name of the position
+        positionId:
+          type: string
+          description: Position ID code
+        isFilled:
+          type: boolean
+          description: Whether the position is currently filled
+        worker:
+          $ref: '#/components/schemas/Reference'
+        jobProfile:
+          $ref: '#/components/schemas/Reference'
+        supervisoryOrganization:
+          $ref: '#/components/schemas/Reference'
+        location:
+          $ref: '#/components/schemas/Reference'
+        availableDate:
+          type: string
+          format: date
+          description: Date the position became or becomes available
+    CompensationDetail:
+      type: object
+      properties:
+        worker:
+          $ref: '#/components/schemas/Reference'
+        effectiveDate:
+          type: string
+          format: date
+          description: Effective date of the compensation plan
+        totalBasePayAnnualized:
+          type: number
+          format: double
+          description: Total annualized base pay amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        compensationPlans:
+          type: array
+          items:
+            type: object
+            properties:
+              compensationPlan:
+                $ref: '#/components/schemas/Reference'
+              amount:
+                type: number
+                format: double
+              currency:
+                type: string
+              frequency:
+                type: string
+                enum:
+                  - Annual
+                  - Monthly
+                  - Hourly
+        compensationGrade:
+          $ref: '#/components/schemas/Reference'
+        compensationStep:
+          $ref: '#/components/schemas/Reference'
+    BenefitEnrollment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Enrollment identifier
+        benefitPlan:
+          $ref: '#/components/schemas/Reference'
+        coverageLevel:
+          type: string
+          description: Coverage level selected
+        coverageBeginDate:
+          type: string
+          format: date
+          description: Coverage start date
+        coverageEndDate:
+          type: string
+          format: date
+          description: Coverage end date
+        employeeCost:
+          type: number
+          format: double
+          description: Employee contribution amount
+        employerCost:
+          type: number
+          format: double
+          description: Employer contribution amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        dependents:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              relationship:
+                type: string
+              dateOfBirth:
+                type: string
+                format: date
+    TimeOffPlan:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Time off plan identifier
+        timeOffPlan:
+          $ref: '#/components/schemas/Reference'
+        balance:
+          type: number
+          format: double
+          description: Current available balance
+        accrued:
+          type: number
+          format: double
+          description: Total accrued time
+        used:
+          type: number
+          format: double
+          description: Total used time
+        unit:
+          type: string
+          enum:
+            - Hours
+            - Days
+          description: Unit of measure for the balance
+        asOfDate:
+          type: string
+          format: date
+          description: Date the balance was calculated
+    PayGroup:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the pay group
+        descriptor:
+          type: string
+          description: Display name of the pay group
+        payFrequency:
+          type: string
+          enum:
+            - Weekly
+            - Biweekly
+            - Semimonthly
+            - Monthly
+          description: Pay frequency
+        country:
+          type: string
+          description: Country associated with the pay group
+        currency:
+          type: string
+          description: ISO 4217 currency code
+    JobRequisition:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the job requisition
+        descriptor:
+          type: string
+          description: Display name of the job requisition
+        requisitionNumber:
+          type: string
+          description: Requisition number
+        status:
+          type: string
+          enum:
+            - Open
+            - Filled
+            - Closed
+            - Frozen
+          description: Current status of the requisition
+        jobProfile:
+          $ref: '#/components/schemas/Reference'
+        supervisoryOrganization:
+          $ref: '#/components/schemas/Reference'
+        location:
+          $ref: '#/components/schemas/Reference'
+        numberOfOpenings:
+          type: integer
+          description: Number of open positions for this requisition
+        targetHireDate:
+          type: string
+          format: date
+          description: Target date for filling the position
+        createdDate:
+          type: string
+          format: date
+          description: Date the requisition was created
+        hiringManager:
+          $ref: '#/components/schemas/Reference'
+    BusinessProcess:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the business process instance
+        descriptor:
+          type: string
+          description: Description of the business process
+        businessProcessType:
+          type: string
+          description: Type of business process
+        status:
+          type: string
+          enum:
+            - InProgress
+            - Completed
+            - Cancelled
+            - Denied
+          description: Current status of the process
+        initiatedDate:
+          type: string
+          format: date-time
+          description: When the process was initiated
+        completedDate:
+          type: string
+          format: date-time
+          description: When the process was completed
+        initiator:
+          $ref: '#/components/schemas/Reference'
+        subject:
+          $ref: '#/components/schemas/Reference'
+        currentStep:
+          type: string
+          description: Current step in the workflow
+        steps:
+          type: array
+          items:
+            type: object
+            properties:
+              stepName:
+                type: string
+              status:
+                type: string
+              assignedTo:
+                $ref: '#/components/schemas/Reference'
+              completedDate:
+                type: string
+                format: date-time
+    Reference:
+      type: object
+      description: A reference to a Workday business object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the referenced object
+        descriptor:
+          type: string
+          description: Display name of the referenced object
+        href:
+          type: string
+          format: uri
+          description: API URL for the referenced resource

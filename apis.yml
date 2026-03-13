@@ -2,7 +2,7 @@ name: Workday Integrations
 description: Workday provides cloud-based enterprise software for finance, HR, and planning. This APIs.json file describes the integration capabilities and APIs available for connecting Workday with other systems.
 image: https://www.workday.com/content/dam/web/en-us/images/logos/workday-logo.svg
 created: '2025-03-15'
-modified: '2025-03-15'
+modified: '2026-03-04'
 specificationVersion: '0.18'
 url: https://apis.json/workday-integrations
 apis:
@@ -25,6 +25,8 @@ apis:
     url: https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
   - type: Rate Limits
     url: https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: OpenAPI
+    url: openapi/workday-integrations-rest-api-openapi.yml
   contact:
   - FN: Workday Support
     email: support@workday.com
@@ -70,6 +72,8 @@ apis:
     url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
   - type: Authentication
     url: https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: OpenAPI
+    url: openapi/workday-integrations-raas-openapi.yml
   contact:
   - FN: Workday Support
     email: support@workday.com
@@ -90,6 +94,8 @@ apis:
     url: https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
   - type: Authentication
     url: https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: OpenAPI
+    url: openapi/workday-integrations-prism-analytics-openapi.yml
   contact:
   - FN: Workday Support
     email: support@workday.com
@@ -112,10 +118,21 @@ common:
   url: https://www.workday.com/en-us/legal.html
 - type: Privacy Policy
   url: https://www.workday.com/en-us/privacy.html
+- type: JSON-LD
+  url: json-ld/workday-integrations-context.jsonld
+- type: JSONSchema
+  url: json-schema/workday-integrations-worker-schema.json
+- type: JSONSchema
+  url: json-schema/workday-integrations-organization-schema.json
+- type: JSONSchema
+  url: json-schema/workday-integrations-position-schema.json
+- type: JSONSchema
+  url: json-schema/workday-integrations-compensation-schema.json
+- type: JSONSchema
+  url: json-schema/workday-integrations-dataset-schema.json
 maintainers:
-- FN: Workday, Inc.
-  email: support@workday.com
-  url: https://www.workday.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
 tags:
 - Enterprise Software
 - HCM

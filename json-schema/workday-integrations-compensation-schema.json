@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://community.workday.com/schemas/workday-integrations/compensation.json",
+  "title": "Workday Compensation Detail",
+  "description": "Represents compensation details for a worker in Workday, including base pay, compensation plans, grades, and total annualized compensation amounts.",
+  "type": "object",
+  "properties": {
+    "worker": {
+      "$ref": "#/$defs/Reference"
+    },
+    "effectiveDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Effective date of the compensation plan"
+    },
+    "totalBasePayAnnualized": {
+      "type": "number",
+      "description": "Total annualized base pay amount"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 currency code"
+    },
+    "compensationPlans": {
+      "type": "array",
+      "description": "Individual compensation plan assignments",
+      "items": {
+        "$ref": "#/$defs/CompensationPlanAssignment"
+      }
+    },
+    "compensationGrade": {
+      "$ref": "#/$defs/Reference"
+    },
+    "compensationStep": {
+      "$ref": "#/$defs/Reference"
+    }
+  },
+  "$defs": {
+    "CompensationPlanAssignment": {
+      "type": "object",
+      "description": "A specific compensation plan assigned to a worker",
+      "properties": {
+        "compensationPlan": {
+          "$ref": "#/$defs/Reference"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Compensation amount"
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$",
+          "description": "ISO 4217 currency code"
+        },
+        "frequency": {
+          "type": "string",
+          "enum": ["Annual", "Monthly", "Hourly"],
+          "description": "Payment frequency"
+        }
+      }
+    },
+    "Reference": {
+      "type": "object",
+      "description": "Reference to a Workday business object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Workday ID of the referenced object"
+        },
+        "descriptor": {
+          "type": "string",
+          "description": "Display name of the referenced object"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri",
+          "description": "API URL for the referenced resource"
+        }
+      }
+    }
+  }
+}
