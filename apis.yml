@@ -1,10 +1,12 @@
+aid: workday-integrations
 name: Workday Integrations
 description: Workday provides cloud-based enterprise software for finance, HR, and planning. This APIs.json file describes the integration capabilities and APIs available for connecting Workday with other systems.
-image: https://www.workday.com/content/dam/web/en-us/images/logos/workday-logo.svg
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 created: '2025-03-15'
-modified: '2026-03-04'
-specificationVersion: '0.18'
-url: https://apis.json/workday-integrations
+modified: '2026-03-16'
+specificationVersion: '0.19'
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/workday-integrations/refs/heads/main/apis.yml
 apis:
 - name: Workday REST API
   description: Modern REST API for accessing Workday business objects including employees, organizations, positions, and more.
