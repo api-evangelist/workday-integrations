@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Workday Prism Analytics API
+  title: Workday Integrations Workday Prism Analytics API
   description: >-
     API for managing external data in Workday Prism Analytics. Enables
     creation of datasets, uploading of external data files, and management
@@ -38,7 +38,7 @@ paths:
   /datasets:
     get:
       operationId: listDatasets
-      summary: List datasets
+      summary: Workday Integrations List datasets
       description: >-
         Retrieve a collection of Prism Analytics datasets available in the
         tenant. Includes both active and draft datasets.
@@ -71,7 +71,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createDataset
-      summary: Create a dataset
+      summary: Workday Integrations Create a dataset
       description: >-
         Create a new Prism Analytics dataset with a defined schema. The dataset
         is created in draft status and must have data uploaded before it can be
@@ -98,7 +98,7 @@ paths:
   /datasets/{datasetId}:
     get:
       operationId: getDataset
-      summary: Get a dataset
+      summary: Workday Integrations Get a dataset
       description: >-
         Retrieve details of a specific Prism Analytics dataset by ID,
         including its schema, status, and row count.
@@ -119,7 +119,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updateDataset
-      summary: Update a dataset
+      summary: Workday Integrations Update a dataset
       description: >-
         Update the schema or metadata of an existing dataset. Only draft
         datasets can be modified.
@@ -148,7 +148,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteDataset
-      summary: Delete a dataset
+      summary: Workday Integrations Delete a dataset
       description: >-
         Delete a Prism Analytics dataset and all associated data.
       tags:
@@ -165,7 +165,7 @@ paths:
   /datasets/{datasetId}/upload:
     post:
       operationId: uploadDataToDataset
-      summary: Upload data to a dataset
+      summary: Workday Integrations Upload data to a dataset
       description: >-
         Upload a data file (CSV or gzipped CSV) to a Prism Analytics dataset.
         The file is validated against the dataset schema. Multiple files can
@@ -207,7 +207,7 @@ paths:
   /datasets/{datasetId}/publish:
     post:
       operationId: publishDataset
-      summary: Publish a dataset
+      summary: Workday Integrations Publish a dataset
       description: >-
         Publish a dataset after data has been uploaded. This makes the data
         available for use in Prism Analytics reports and dashboards. Publishing
@@ -236,7 +236,7 @@ paths:
   /tables:
     get:
       operationId: listTables
-      summary: List data tables
+      summary: Workday Integrations List data tables
       description: >-
         Retrieve a collection of Prism Analytics data tables available in the
         tenant, including both Workday-sourced and external data tables.
@@ -269,7 +269,7 @@ paths:
   /tables/{tableId}:
     get:
       operationId: getTable
-      summary: Get a data table
+      summary: Workday Integrations Get a data table
       description: >-
         Retrieve details of a specific data table by ID, including its schema
         and source information.
@@ -296,7 +296,7 @@ paths:
   /dataSources:
     get:
       operationId: listDataSources
-      summary: List data sources
+      summary: Workday Integrations List data sources
       description: >-
         Retrieve available data sources for Prism Analytics, including native
         Workday data sources and external datasets that can be used in reports.

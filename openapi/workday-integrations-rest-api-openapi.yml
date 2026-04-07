@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Workday REST API
+  title: Workday Integrations Workday REST API
   description: >-
     Modern REST API for accessing Workday business objects including workers,
     organizations, positions, jobs, compensation, benefits, time off, and more.
@@ -49,7 +49,7 @@ paths:
   /workers:
     get:
       operationId: listWorkers
-      summary: List workers
+      summary: Workday Integrations List workers
       description: >-
         Retrieve a collection of workers. Returns employees and contingent
         workers with their basic profile information. Supports pagination,
@@ -84,7 +84,7 @@ paths:
   /workers/{workerId}:
     get:
       operationId: getWorker
-      summary: Get a worker
+      summary: Workday Integrations Get a worker
       description: >-
         Retrieve detailed information about a specific worker by their Workday
         ID, including personal data, employment details, and organizational
@@ -109,7 +109,7 @@ paths:
   /workers/{workerId}/history:
     get:
       operationId: getWorkerHistory
-      summary: Get worker history
+      summary: Workday Integrations Get worker history
       description: >-
         Retrieve the employment history for a specific worker, including job
         changes, promotions, transfers, and organizational moves.
@@ -138,7 +138,7 @@ paths:
   /workers/{workerId}/timeOffPlans:
     get:
       operationId: getWorkerTimeOffPlans
-      summary: Get worker time off plans
+      summary: Workday Integrations Get worker time off plans
       description: >-
         Retrieve time off plans and balances for a specific worker, including
         accrued, used, and available balances.
@@ -167,7 +167,7 @@ paths:
   /workers/{workerId}/compensation:
     get:
       operationId: getWorkerCompensation
-      summary: Get worker compensation
+      summary: Workday Integrations Get worker compensation
       description: >-
         Retrieve compensation details for a specific worker, including base pay,
         allowances, bonuses, and total compensation.
@@ -189,7 +189,7 @@ paths:
   /workers/{workerId}/benefits:
     get:
       operationId: getWorkerBenefits
-      summary: Get worker benefit enrollments
+      summary: Workday Integrations Get worker benefit enrollments
       description: >-
         Retrieve benefit enrollment details for a specific worker, including
         health, dental, vision, life insurance, and retirement plans.
@@ -218,7 +218,7 @@ paths:
   /organizations:
     get:
       operationId: listOrganizations
-      summary: List organizations
+      summary: Workday Integrations List organizations
       description: >-
         Retrieve a collection of organizations including supervisory, cost
         center, company, region, and custom organization types.
@@ -260,7 +260,7 @@ paths:
   /organizations/{organizationId}:
     get:
       operationId: getOrganization
-      summary: Get an organization
+      summary: Workday Integrations Get an organization
       description: >-
         Retrieve detailed information about a specific organization by ID,
         including its type, hierarchy, and manager.
@@ -282,7 +282,7 @@ paths:
   /organizations/{organizationId}/workers:
     get:
       operationId: listOrganizationWorkers
-      summary: List workers in an organization
+      summary: Workday Integrations List workers in an organization
       description: >-
         Retrieve workers assigned to a specific organization.
       tags:
@@ -313,7 +313,7 @@ paths:
   /jobProfiles:
     get:
       operationId: listJobProfiles
-      summary: List job profiles
+      summary: Workday Integrations List job profiles
       description: >-
         Retrieve a collection of job profile definitions configured in the
         Workday tenant, including job families and management levels.
@@ -342,7 +342,7 @@ paths:
   /jobProfiles/{jobProfileId}:
     get:
       operationId: getJobProfile
-      summary: Get a job profile
+      summary: Workday Integrations Get a job profile
       description: >-
         Retrieve details of a specific job profile by ID.
       tags:
@@ -368,7 +368,7 @@ paths:
   /positions:
     get:
       operationId: listPositions
-      summary: List positions
+      summary: Workday Integrations List positions
       description: >-
         Retrieve a collection of position records, including filled and
         unfilled positions with their associated job profiles.
@@ -397,7 +397,7 @@ paths:
   /positions/{positionId}:
     get:
       operationId: getPosition
-      summary: Get a position
+      summary: Workday Integrations Get a position
       description: >-
         Retrieve details of a specific position by ID, including the
         assigned worker and job profile.
@@ -424,7 +424,7 @@ paths:
   /payGroups:
     get:
       operationId: listPayGroups
-      summary: List pay groups
+      summary: Workday Integrations List pay groups
       description: >-
         Retrieve a collection of pay groups configured in the tenant.
       tags:
@@ -451,7 +451,7 @@ paths:
   /jobRequisitions:
     get:
       operationId: listJobRequisitions
-      summary: List job requisitions
+      summary: Workday Integrations List job requisitions
       description: >-
         Retrieve a collection of job requisitions for open positions.
       tags:
@@ -479,7 +479,7 @@ paths:
   /jobRequisitions/{jobRequisitionId}:
     get:
       operationId: getJobRequisition
-      summary: Get a job requisition
+      summary: Workday Integrations Get a job requisition
       description: >-
         Retrieve details of a specific job requisition by ID.
       tags:
@@ -505,7 +505,7 @@ paths:
   /businessProcesses:
     get:
       operationId: listBusinessProcesses
-      summary: List business processes
+      summary: Workday Integrations List business processes
       description: >-
         Retrieve active business process instances, including approval
         workflows and their current status.
@@ -543,7 +543,7 @@ paths:
   /businessProcesses/{processId}:
     get:
       operationId: getBusinessProcess
-      summary: Get a business process
+      summary: Workday Integrations Get a business process
       description: >-
         Retrieve details and current status of a specific business process
         instance by ID.

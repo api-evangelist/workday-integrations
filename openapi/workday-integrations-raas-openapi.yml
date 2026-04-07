@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Workday Report-as-a-Service (RaaS) API
+  title: Workday Integrations Workday Report-as-a-Service (RaaS) API
   description: >-
     API for accessing Workday custom and standard reports as RESTful web
     services. Enables external systems to consume report data in JSON, CSV, or
@@ -34,7 +34,7 @@ paths:
   /{reportOwner}/{reportName}:
     get:
       operationId: getReport
-      summary: Get report data
+      summary: Workday Integrations Get report data
       description: >-
         Execute a Workday custom report and retrieve its data. The report must
         have web service enabled. Returns data in JSON format by default, with
@@ -136,7 +136,7 @@ paths:
   /{reportOwner}/{reportName}/fields:
     get:
       operationId: getReportMetadata
-      summary: Get report field metadata
+      summary: Workday Integrations Get report field metadata
       description: >-
         Retrieve metadata about a report including available fields, field
         types, and prompt parameters that can be used for filtering.
