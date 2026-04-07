@@ -24,14 +24,14 @@ servers:
         default: mycompany
         description: Workday tenant name
 tags:
-  - name: Datasets
-    description: Manage Prism Analytics dataset definitions
-  - name: Data Upload
-    description: Upload external data files into datasets
-  - name: Tables
-    description: Manage data tables derived from datasets
   - name: Data Sources
     description: Discover available Workday and external data sources
+  - name: Data Upload
+    description: Upload external data files into datasets
+  - name: Datasets
+    description: Manage Prism Analytics dataset definitions
+  - name: Tables
+    description: Manage data tables derived from datasets
 security:
   - bearerAuth: []
 paths:

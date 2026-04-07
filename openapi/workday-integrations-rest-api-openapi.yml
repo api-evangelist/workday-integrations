@@ -23,26 +23,26 @@ servers:
         default: mycompany
         description: Workday tenant name
 tags:
-  - name: Workers
-    description: Access and manage worker records including employees and contingent workers
-  - name: Organizations
-    description: Retrieve and manage organizational structures and hierarchies
-  - name: Job Profiles
-    description: Access job profile definitions and configurations
-  - name: Positions
-    description: Manage position records and staffing
-  - name: Compensation
-    description: Access compensation plans and worker compensation data
   - name: Benefits
     description: Access benefit plans and worker benefit enrollments
-  - name: Time Off
-    description: Manage time off requests and balances
-  - name: Payroll
-    description: Access payroll data and pay group configurations
-  - name: Recruiting
-    description: Manage job requisitions and candidate applications
   - name: Business Processes
     description: Interact with Workday business process workflows
+  - name: Compensation
+    description: Access compensation plans and worker compensation data
+  - name: Job Profiles
+    description: Access job profile definitions and configurations
+  - name: Organizations
+    description: Retrieve and manage organizational structures and hierarchies
+  - name: Payroll
+    description: Access payroll data and pay group configurations
+  - name: Positions
+    description: Manage position records and staffing
+  - name: Recruiting
+    description: Manage job requisitions and candidate applications
+  - name: Time Off
+    description: Manage time off requests and balances
+  - name: Workers
+    description: Access and manage worker records including employees and contingent workers
 security:
   - bearerAuth: []
 paths:

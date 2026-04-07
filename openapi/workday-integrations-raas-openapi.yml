@@ -23,10 +23,10 @@ servers:
         default: mycompany
         description: Workday tenant name
 tags:
-  - name: Reports
-    description: Access custom and standard Workday reports
   - name: Report Metadata
     description: Retrieve report field definitions and filter parameters
+  - name: Reports
+    description: Access custom and standard Workday reports
 security:
   - basicAuth: []
   - bearerAuth: []
