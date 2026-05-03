@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}/datasets",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "External HR Data Q1 2026",
+      "description": "External HR system data for Q1 2026 analytics",
+      "schema": {
+        "fields": [
+          {"name": "employee_id", "type": "Text", "nullable": false},
+          {"name": "department", "type": "Text", "nullable": false},
+          {"name": "salary", "type": "Numeric", "nullable": true},
+          {"name": "hire_date", "type": "Date", "nullable": false}
+        ]
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "id": "dataset_q1_2026_hr",
+      "name": "External HR Data Q1 2026",
+      "status": "draft",
+      "createdAt": "2026-05-03T10:00:00Z",
+      "href": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/tenant1/datasets/dataset_q1_2026_hr"
+    }
+  }
+}

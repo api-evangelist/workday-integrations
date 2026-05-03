@@ -132,6 +132,12 @@ common:
     url: json-schema/workday-integrations-compensation-schema.json
   - type: JSONSchema
     url: json-schema/workday-integrations-dataset-schema.json
+  - type: Spectral Rules
+    url: rules/workday-integrations-rules.yml
+  - type: Naftiko Capabilities
+    url: capabilities/workforce-data-integration.yaml
+  - type: Vocabulary
+    url: vocabulary/workday-integrations-vocabulary.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

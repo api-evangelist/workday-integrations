@@ -1,0 +1,113 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Workday RaaS (Report-as-a-Service)"
+  description: "Access custom and standard Workday reports as web services, enabling external systems to consume report data programmatically."
+  tags:
+    - Workday
+    - Integrations
+    - Reporting
+    - RaaS
+    - Analytics
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WORKDAY_INTEGRATIONS_ACCESS_TOKEN: WORKDAY_INTEGRATIONS_ACCESS_TOKEN
+      WORKDAY_TENANT: WORKDAY_TENANT
+
+capability:
+  consumes:
+    - type: http
+      namespace: raas
+      baseUri: https://wd2-impl-services1.workday.com/ccx/service/customreport2/{tenant}
+      description: "Workday Report-as-a-Service API"
+      authentication:
+        type: bearer
+        token: "{{WORKDAY_INTEGRATIONS_ACCESS_TOKEN}}"
+      resources:
+        - name: reports
+          path: /reports
+          description: "Report execution"
+          operations:
+            - name: get-report
+              method: GET
+              description: "Get report data"
+              inputParameters:
+                - name: reportName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Report name"
+                - name: format
+                  in: query
+                  type: string
+                  required: false
+                  description: "Output format (json, csv, xml)"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-report-metadata
+              method: GET
+              description: "Get report field metadata"
+              inputParameters:
+                - name: reportName
+                  in: path
+                  type: string
+                  required: true
+                  description: "Report name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: raas-rest-api
+      resources:
+        - path: /v1/reports/{reportName}
+          name: report-execution
+          operations:
+            - method: GET
+              name: get-report
+              description: "Get report data"
+              call: "raas.get-report"
+              with:
+                reportName: "rest.reportName"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: raas-mcp
+      transport: http
+      tools:
+        - name: get-report
+          description: "Execute a Workday custom or standard report and return data"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "raas.get-report"
+          with:
+            reportName: "tools.reportName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-report-metadata
+          description: "Get field metadata for a Workday report"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "raas.get-report-metadata"
+          with:
+            reportName: "tools.reportName"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,88 @@
+name: Workday Integrations Vocabulary
+description: Vocabulary and taxonomy for Workday Integration APIs covering HCM data access, reporting, and analytics data pipelines.
+url: https://raw.githubusercontent.com/api-evangelist/workday-integrations/main/vocabulary/workday-integrations-vocabulary.yml
+created: '2026-05-03'
+modified: '2026-05-03'
+
+domains:
+  - name: HCM Data
+    description: Human Capital Management data objects available via REST API
+    terms:
+      - name: Worker
+        description: An individual employed or engaged by the organization as an employee or contingent worker
+        synonyms: [Employee, Contingent Worker, Staff Member]
+        values: [Employee, Contingent Worker]
+        related: [Organization, Position, JobProfile]
+      - name: Organization
+        description: An organizational unit such as a supervisory organization, cost center, or company
+        synonyms: [Org, Supervisory Organization, Department]
+        related: [Worker, Position]
+      - name: Position
+        description: A slot within an organization that can be filled by a worker
+        synonyms: [Job Slot, Headcount Position]
+        related: [Worker, JobProfile]
+      - name: Job Profile
+        description: A template defining the characteristics of a job including skills, duties, and compensation grade
+        synonyms: [Job, Role Template]
+        related: [Position, Worker]
+      - name: Job Requisition
+        description: An approved request to fill a position through recruiting
+        synonyms: [Req, Open Position, Headcount Request]
+        related: [Position, JobProfile]
+      - name: Business Process
+        description: A configurable workflow in Workday that routes work through approval steps
+        synonyms: [Workflow, BP, Approval Process]
+        related: [Worker, Organization]
+
+  - name: Reporting
+    description: Report-as-a-Service concepts
+    terms:
+      - name: Custom Report
+        description: A user-defined report built in Workday Report Writer for data extraction
+        synonyms: [RaaS Report, Workday Report, Custom Report Service]
+      - name: Report Metadata
+        description: Field definitions and schema information describing a report's output columns
+        synonyms: [Report Schema, Field Definitions]
+        related: [CustomReport]
+
+  - name: Prism Analytics
+    description: Analytics data loading and management concepts
+    terms:
+      - name: Dataset
+        description: A named data container in Prism Analytics that holds external data loaded via the API
+        synonyms: [Data Table, Prism Table, Analytics Dataset]
+        related: [DataSource, Schema]
+      - name: Data Source
+        description: An external data connection feeding data into Prism Analytics
+        synonyms: [Connection, Feed]
+        related: [Dataset]
+      - name: Schema
+        description: The field definitions describing the structure of data in a Prism dataset
+        synonyms: [Table Schema, Column Definitions]
+        related: [Dataset]
+
+  - name: Authentication
+    description: Security concepts for Workday Integrations
+    terms:
+      - name: OAuth 2.0
+        description: The authorization protocol used to obtain bearer tokens for API access
+        synonyms: [OAuth, OAuth2]
+      - name: Bearer Token
+        description: An access token granting API access on behalf of a Workday integration system user
+        synonyms: [Access Token, JWT Token]
+      - name: Integration System User
+        description: A Workday service account created to authenticate API and integration calls
+        synonyms: [ISU, Service Account, API User]
+      - name: Tenant
+        description: An isolated Workday instance identified by a unique name in API URLs
+        synonyms: [Workday Tenant, Instance]
+
+tags:
+  - Cloud
+  - Enterprise Software
+  - ERP
+  - Finance
+  - HCM
+  - HR
+  - Integration
+  - Workday

@@ -1,0 +1,251 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Workday Integrations Workforce Data Integration"
+  description: "Unified capability for workforce data integration combining Workday REST API for HCM data access, RaaS for report-based data extraction, and Prism Analytics for loading external data into Workday. Enables HR systems integrators to build bidirectional workforce data pipelines."
+  tags:
+    - Workday
+    - Integrations
+    - Workforce Data
+    - HCM
+    - Integration
+    - Analytics
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WORKDAY_INTEGRATIONS_ACCESS_TOKEN: WORKDAY_INTEGRATIONS_ACCESS_TOKEN
+      WORKDAY_TENANT: WORKDAY_TENANT
+
+capability:
+  consumes:
+    - import: workday-rest
+      location: ./shared/rest-api.yaml
+    - import: raas
+      location: ./shared/raas.yaml
+    - import: prism-analytics
+      location: ./shared/prism-analytics.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: workday-integrations-api
+      description: "Unified REST API for Workday workforce data integration."
+      resources:
+        - path: /v1/workers
+          name: workers
+          description: "Worker record access"
+          operations:
+            - method: GET
+              name: list-workers
+              description: "List workers"
+              call: "workday-rest.list-workers"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/workers/{workerId}
+          name: worker-detail
+          description: "Individual worker data"
+          operations:
+            - method: GET
+              name: get-worker
+              description: "Get worker details"
+              call: "workday-rest.get-worker"
+              with:
+                workerId: "rest.workerId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/organizations
+          name: organizations
+          description: "Organizational structure"
+          operations:
+            - method: GET
+              name: list-organizations
+              description: "List organizations"
+              call: "workday-rest.list-organizations"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/positions
+          name: positions
+          description: "Position records"
+          operations:
+            - method: GET
+              name: list-positions
+              description: "List positions"
+              call: "workday-rest.list-positions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/reports/{reportName}
+          name: reports
+          description: "Report-as-a-Service data access"
+          operations:
+            - method: GET
+              name: get-report
+              description: "Execute and retrieve report data"
+              call: "raas.get-report"
+              with:
+                reportName: "rest.reportName"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/datasets
+          name: datasets
+          description: "Prism Analytics dataset management"
+          operations:
+            - method: GET
+              name: list-datasets
+              description: "List Prism datasets"
+              call: "prism-analytics.list-datasets"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-dataset
+              description: "Create a Prism dataset"
+              call: "prism-analytics.create-dataset"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: workday-integrations-mcp
+      transport: http
+      description: "MCP server for AI-assisted Workday workforce data integration."
+      tools:
+        - name: list-workers
+          description: "List Workday workers including employees and contingent workers"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "workday-rest.list-workers"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-worker
+          description: "Get detailed information about a specific worker"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "workday-rest.get-worker"
+          with:
+            workerId: "tools.workerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-worker-compensation
+          description: "Get compensation data for a worker"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "workday-rest.get-worker-compensation"
+          with:
+            workerId: "tools.workerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-worker-benefits
+          description: "Get benefit enrollments for a worker"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "workday-rest.get-worker-benefits"
+          with:
+            workerId: "tools.workerId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-organizations
+          description: "List Workday organizational structures"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "workday-rest.list-organizations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-positions
+          description: "List Workday position records"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "workday-rest.list-positions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-job-profiles
+          description: "List job profiles in Workday"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "workday-rest.list-job-profiles"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-report
+          description: "Execute a Workday RaaS report and return data"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "raas.get-report"
+          with:
+            reportName: "tools.reportName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-report-metadata
+          description: "Get field metadata for a Workday report"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "raas.get-report-metadata"
+          with:
+            reportName: "tools.reportName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-datasets
+          description: "List Prism Analytics datasets"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "prism-analytics.list-datasets"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-dataset
+          description: "Create a new Prism Analytics dataset"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "prism-analytics.create-dataset"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: upload-data-to-dataset
+          description: "Upload external data to a Prism Analytics dataset"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "prism-analytics.upload-data-to-dataset"
+          with:
+            datasetId: "tools.datasetId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: publish-dataset
+          description: "Publish a Prism Analytics dataset for reporting"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "prism-analytics.publish-dataset"
+          with:
+            datasetId: "tools.datasetId"
+          outputParameters:
+            - type: object
+              mapping: "$."

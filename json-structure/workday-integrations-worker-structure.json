@@ -1,0 +1,24 @@
+{
+  "name": "Workday Integrations Worker",
+  "description": "Structure of a Workday worker record from the REST API",
+  "fields": [
+    {"name": "id", "type": "string", "required": true},
+    {"name": "descriptor", "type": "string", "description": "Display name"},
+    {"name": "employeeId", "type": "string"},
+    {"name": "workerType", "type": "enum", "values": ["Employee", "Contingent Worker"]},
+    {
+      "name": "primaryJob",
+      "type": "object",
+      "fields": [
+        {"name": "id", "type": "string"},
+        {"name": "descriptor", "type": "string"},
+        {"name": "position", "type": "object"},
+        {"name": "businessSite", "type": "object"},
+        {"name": "supervisoryOrganization", "type": "object"}
+      ]
+    },
+    {"name": "hireDate", "type": "string", "format": "date"},
+    {"name": "terminationDate", "type": "string", "format": "date"},
+    {"name": "href", "type": "string", "format": "uri"}
+  ]
+}

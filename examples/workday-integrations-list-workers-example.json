@@ -1,0 +1,47 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}/workers",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Accept": "application/json"
+    },
+    "parameters": {"limit": 20, "offset": 0}
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "total": 2,
+      "data": [
+        {
+          "id": "worker_abc123",
+          "descriptor": "John Doe",
+          "employeeId": "EMP-001234",
+          "workerType": "Employee",
+          "primaryJob": {
+            "id": "job_001",
+            "descriptor": "Software Engineer",
+            "position": {"id": "pos_001", "descriptor": "SE-Senior-001"},
+            "businessSite": {"id": "site_001", "descriptor": "San Francisco HQ"}
+          },
+          "hireDate": "2022-03-15",
+          "href": "https://wd2-impl-services1.workday.com/ccx/api/v1/tenant1/workers/worker_abc123"
+        },
+        {
+          "id": "worker_def456",
+          "descriptor": "Jane Smith",
+          "employeeId": "EMP-001235",
+          "workerType": "Employee",
+          "primaryJob": {
+            "id": "job_002",
+            "descriptor": "Product Manager",
+            "position": {"id": "pos_002", "descriptor": "PM-Senior-002"},
+            "businessSite": {"id": "site_002", "descriptor": "New York Office"}
+          },
+          "hireDate": "2021-09-01",
+          "href": "https://wd2-impl-services1.workday.com/ccx/api/v1/tenant1/workers/worker_def456"
+        }
+      ]
+    }
+  }
+}
