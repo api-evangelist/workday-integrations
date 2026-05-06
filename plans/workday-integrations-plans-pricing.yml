@@ -4,177 +4,39 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Workday Integrations
 providerId: workday-integrations
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Cloud
   - Enterprise Software
-  - ERP
-  - Finance
-  - HCM
-  - HR
   - Integration
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+  - iPaaS
+description: Workday Integrations is an alternate naming for the Workday Integration Cloud surface (Studio, Cloud Connect, EIB). It is bundled into the parent Workday tenant subscription; Workday does not publish public pricing for the integration capability.
+sources:
+  - https://www.workday.com/en-us/enterprise-resource-planning.html
+notes: Duplicates the workday-integration slug. No public price list. Scaffold Free / Pro / Enterprise tiers have been collapsed.
 plans:
-  - id: workday-integrations-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the Workday Integrations API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/customreport2/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/customreport2/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Workday REST API
-      - name: Workday SOAP Web Services
-      - name: Workday RaaS (Report-as-a-Service)
-      - name: Workday Prism Analytics API
-  - id: workday-integrations-pro
-    name: Professional
-    type: paid
-    description: Production tier for Workday Integrations. Provides higher quotas, priority support, and
-      access to the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/customreport2/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/customreport2/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains:
-          - https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/customreport2/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Workday REST API
-      - name: Workday SOAP Web Services
-      - name: Workday RaaS (Report-as-a-Service)
-      - name: Workday Prism Analytics API
-  - id: workday-integrations-enterprise
-    name: Enterprise
+  - id: workday-integrations-contact-sales
+    name: Contact Sales
     type: enterprise
-    description: Custom-negotiated tier for Workday Integrations. Includes dedicated capacity, contractual
-      SLAs, security review, data residency options, and named technical account management.
+    description: Workday Integrations capability (Studio, Cloud Connect, EIB) is licensed under the Workday tenant subscription. Pricing is negotiated as part of the master Workday agreement.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Integrations Capability
+        name: integrations_capability
+        type: subscription
+        metric: varies
         limit: -1
-        timeFrame: month
-        geo: configurable
-        domains:
-          - https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/customreport2/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
+        timeFrame: year
+        geo: global
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/service/customreport2/{tenant}
-          - https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
-        unit: 1
-        price: custom
+        price: contact sales
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Workday REST API
-      - name: Workday SOAP Web Services
-      - name: Workday RaaS (Report-as-a-Service)
-      - name: Workday Prism Analytics API
+      - name: Workday Integration Cloud
+      - name: Workday Studio Runtime
+      - name: Cloud Connect Packaged Integrations
+      - name: Enterprise Interface Builder (EIB)
+      - name: Bundled with Workday Tenant
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

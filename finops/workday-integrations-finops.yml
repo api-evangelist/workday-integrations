@@ -1,163 +1,64 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Workday Integrations
+providerId: workday-integrations
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - Integration
+  - iPaaS
+  - FinOps
+  - FOCUS
+description: FOCUS-aligned FinOps stub for the Workday Integrations capability. Integration entitlement is bundled into the Workday tenant subscription; per-integration-run pricing and a public usage API are not exposed, so meters describe contractual entitlement rather than runtime billing.
+sources:
+  - https://www.workday.com/en-us/enterprise-resource-planning.html
+notes: Duplicates the workday-integration finops surface under the alternate slug. Generic api_request / data_egress / compute_seconds meters from the scaffold have been removed.
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: Workday Integrations
-providerId: workday-integrations
-publisherName: Workday Integrations
-serviceCategory: API
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - Cloud
-  - Enterprise Software
-  - ERP
-  - Finance
-  - HCM
-  - HR
-  - Integration
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the Workday Integrations API surface. Provides a FOCUS-aligned
-  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+publisherName: Workday, Inc.
+serviceCategory: Integration / iPaaS
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Subscription
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: Workday Integrations
-  ServiceCategory: Developer Tools / API
-  ProviderName: Workday Integrations
-  PublisherName: Workday Integrations
-  InvoiceIssuerName: Workday Integrations
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceCategory: Integration / iPaaS
+  ProviderName: Workday
+  PublisherName: Workday, Inc.
+  InvoiceIssuerName: Workday, Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
-    aggregation: sum
+  - name: integrations_entitlement
+    description: Annual Workday Integrations entitlement attached to the tenant subscription; covers Studio runtime and bundled Cloud Connect packs.
+    unit: month
+    aggregation: max
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
+      - tenant
+  - name: active_integrations
+    description: Count of customer-built and Cloud Connect integrations active in the tenant; used for governance and renewal sizing rather than per-run billing.
+    unit: integration
+    aggregation: max
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Workday REST API
-    baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
-    tags:
-      - Enterprise
-      - Finance
-      - HR
-      - REST
-    serviceName: Workday REST API
-    serviceCategory: API
-  - name: Workday SOAP Web Services
-    baseURL: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
-    tags:
-      - Finance
-      - HCM
-      - Integration
-      - SOAP
-      - Web Services
-    serviceName: Workday SOAP Web Services
-    serviceCategory: API
-  - name: Workday RaaS (Report-as-a-Service)
-    baseURL: https://wd2-impl-services1.workday.com/ccx/service/customreport2/{tenant}
-    tags:
-      - Analytics
-      - Custom Reports
-      - Data Export
-      - Reports
-    serviceName: Workday RaaS (Report-as-a-Service)
-    serviceCategory: API
-  - name: Workday Prism Analytics API
-    baseURL: https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
-    tags:
-      - Analytics
-      - Data Loading
-      - External Data
-      - Prism
-    serviceName: Workday Prism Analytics API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - tenant
+      - integration_type
+principles:
+  - name: Visibility
+    description: Maintain an integration inventory (owner, source / target, cadence) and reconcile it against tenant integration event reports; invoice line items don't break out integration runs, so visibility comes from the catalog plus utilization telemetry.
+  - name: Allocation
+    description: Allocate integration spend back to the systems-of-record on each side of the integration; require a business case linking each new integration to a downstream consumer.
+  - name: Optimization
+    description: Retire dead integrations at renewal, prefer EIB over custom Studio when data shape allows, schedule batch runs in low-load windows, and consolidate point-to-point flows into reusable Studio templates.
+  - name: Accountability
+    description: An Integration Center of Excellence lead approves new integrations, runs quarterly inventory reviews, and represents the integration backlog at Workday renewal conversations.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
