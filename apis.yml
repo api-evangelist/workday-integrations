@@ -25,7 +25,7 @@ apis:
         url: https://community.workday.com/sites/default/files/file-hosting/restapi/openapi.json
       - type: Authentication
         url: https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
-      - type: Rate Limits
+      - type: RateLimits
         url: https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
       - type: OpenAPI
         url: openapi/workday-integrations-rest-api-openapi.yml
@@ -92,7 +92,7 @@ apis:
     properties:
       - type: Documentation
         url: https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
-      - type: API Reference
+      - type: APIReference
         url: https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
       - type: Authentication
         url: https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
@@ -114,13 +114,13 @@ common:
     url: https://community.workday.com/
   - type: Support
     url: https://www.workday.com/en-us/customer-experience/support.html
-  - type: Status Page
+  - type: StatusPage
     url: https://status.workday.com/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.workday.com/en-us/legal.html
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.workday.com/en-us/privacy.html
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/workday-integrations-context.jsonld
   - type: JSONSchema
     url: json-schema/workday-integrations-worker-schema.json
