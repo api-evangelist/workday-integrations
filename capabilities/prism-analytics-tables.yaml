@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integrations Workday Prism Analytics API — Tables
+  description: 'Workday Integrations Workday Prism Analytics API — Tables. 2 operations. Lead operation: Workday Integrations
+    List data tables. Self-contained Naftiko capability covering one Workday Integrations business surface.'
+  tags:
+  - Workday Integrations
+  - Tables
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATIONS_API_KEY: WORKDAY_INTEGRATIONS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: prism-analytics-tables
+    baseUri: https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
+    description: Workday Integrations Workday Prism Analytics API — Tables business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: tables
+      path: /tables
+      operations:
+      - name: listtables
+        method: GET
+        description: Workday Integrations List data tables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Filter tables by name
+    - name: tables-tableId
+      path: /tables/{tableId}
+      operations:
+      - name: gettable
+        method: GET
+        description: Workday Integrations Get a data table
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tableId
+          in: path
+          type: string
+          description: Workday ID of the data table
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATIONS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: prism-analytics-tables-rest
+    port: 8080
+    description: REST adapter for Workday Integrations Workday Prism Analytics API — Tables. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/tables
+      name: tables
+      description: REST surface for tables.
+      operations:
+      - method: GET
+        name: listtables
+        description: Workday Integrations List data tables
+        call: prism-analytics-tables.listtables
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tables/{tableid}
+      name: tables-tableid
+      description: REST surface for tables-tableId.
+      operations:
+      - method: GET
+        name: gettable
+        description: Workday Integrations Get a data table
+        call: prism-analytics-tables.gettable
+        with:
+          tableId: rest.tableId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: prism-analytics-tables-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integrations Workday Prism Analytics API — Tables. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integrations-list-data-tables
+      description: Workday Integrations List data tables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: prism-analytics-tables.listtables
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integrations-get-data-table
+      description: Workday Integrations Get a data table
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: prism-analytics-tables.gettable
+      with:
+        tableId: tools.tableId
+      outputParameters:
+      - type: object
+        mapping: $.

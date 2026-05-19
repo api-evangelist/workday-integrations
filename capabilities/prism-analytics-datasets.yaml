@@ -1,0 +1,239 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integrations Workday Prism Analytics API — Datasets
+  description: 'Workday Integrations Workday Prism Analytics API — Datasets. 6 operations. Lead operation: Workday Integrations
+    List datasets. Self-contained Naftiko capability covering one Workday Integrations business surface.'
+  tags:
+  - Workday Integrations
+  - Datasets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATIONS_API_KEY: WORKDAY_INTEGRATIONS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: prism-analytics-datasets
+    baseUri: https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
+    description: Workday Integrations Workday Prism Analytics API — Datasets business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: datasets
+      path: /datasets
+      operations:
+      - name: listdatasets
+        method: GET
+        description: Workday Integrations List datasets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Filter datasets by name
+      - name: createdataset
+        method: POST
+        description: Workday Integrations Create a dataset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: datasets-datasetId
+      path: /datasets/{datasetId}
+      operations:
+      - name: getdataset
+        method: GET
+        description: Workday Integrations Get a dataset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatedataset
+        method: PUT
+        description: Workday Integrations Update a dataset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletedataset
+        method: DELETE
+        description: Workday Integrations Delete a dataset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: datasets-datasetId-publish
+      path: /datasets/{datasetId}/publish
+      operations:
+      - name: publishdataset
+        method: POST
+        description: Workday Integrations Publish a dataset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATIONS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: prism-analytics-datasets-rest
+    port: 8080
+    description: REST adapter for Workday Integrations Workday Prism Analytics API — Datasets. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/datasets
+      name: datasets
+      description: REST surface for datasets.
+      operations:
+      - method: GET
+        name: listdatasets
+        description: Workday Integrations List datasets
+        call: prism-analytics-datasets.listdatasets
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createdataset
+        description: Workday Integrations Create a dataset
+        call: prism-analytics-datasets.createdataset
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/datasets/{datasetid}
+      name: datasets-datasetid
+      description: REST surface for datasets-datasetId.
+      operations:
+      - method: GET
+        name: getdataset
+        description: Workday Integrations Get a dataset
+        call: prism-analytics-datasets.getdataset
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatedataset
+        description: Workday Integrations Update a dataset
+        call: prism-analytics-datasets.updatedataset
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletedataset
+        description: Workday Integrations Delete a dataset
+        call: prism-analytics-datasets.deletedataset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/datasets/{datasetid}/publish
+      name: datasets-datasetid-publish
+      description: REST surface for datasets-datasetId-publish.
+      operations:
+      - method: POST
+        name: publishdataset
+        description: Workday Integrations Publish a dataset
+        call: prism-analytics-datasets.publishdataset
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: prism-analytics-datasets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integrations Workday Prism Analytics API — Datasets. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integrations-list-datasets
+      description: Workday Integrations List datasets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: prism-analytics-datasets.listdatasets
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integrations-create-dataset
+      description: Workday Integrations Create a dataset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: prism-analytics-datasets.createdataset
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integrations-get-dataset
+      description: Workday Integrations Get a dataset
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: prism-analytics-datasets.getdataset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integrations-update-dataset
+      description: Workday Integrations Update a dataset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: prism-analytics-datasets.updatedataset
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integrations-delete-dataset
+      description: Workday Integrations Delete a dataset
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: prism-analytics-datasets.deletedataset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workday-integrations-publish-dataset
+      description: Workday Integrations Publish a dataset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: prism-analytics-datasets.publishdataset
+      outputParameters:
+      - type: object
+        mapping: $.

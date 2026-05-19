@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integrations Workday REST API — Payroll
+  description: 'Workday Integrations Workday REST API — Payroll. 1 operations. Lead operation: Workday Integrations List pay
+    groups. Self-contained Naftiko capability covering one Workday Integrations business surface.'
+  tags:
+  - Workday Integrations
+  - Payroll
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATIONS_API_KEY: WORKDAY_INTEGRATIONS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-payroll
+    baseUri: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+    description: Workday Integrations Workday REST API — Payroll business capability. Self-contained, no shared references.
+    resources:
+    - name: payGroups
+      path: /payGroups
+      operations:
+      - name: listpaygroups
+        method: GET
+        description: Workday Integrations List pay groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATIONS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-payroll-rest
+    port: 8080
+    description: REST adapter for Workday Integrations Workday REST API — Payroll. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/paygroups
+      name: paygroups
+      description: REST surface for payGroups.
+      operations:
+      - method: GET
+        name: listpaygroups
+        description: Workday Integrations List pay groups
+        call: rest-payroll.listpaygroups
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-payroll-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integrations Workday REST API — Payroll. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: workday-integrations-list-pay-groups
+      description: Workday Integrations List pay groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-payroll.listpaygroups
+      outputParameters:
+      - type: object
+        mapping: $.

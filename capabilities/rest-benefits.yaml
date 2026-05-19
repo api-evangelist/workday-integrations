@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integrations Workday REST API — Benefits
+  description: 'Workday Integrations Workday REST API — Benefits. 1 operations. Lead operation: Workday Integrations Get worker
+    benefit enrollments. Self-contained Naftiko capability covering one Workday Integrations business surface.'
+  tags:
+  - Workday Integrations
+  - Benefits
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATIONS_API_KEY: WORKDAY_INTEGRATIONS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-benefits
+    baseUri: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+    description: Workday Integrations Workday REST API — Benefits business capability. Self-contained, no shared references.
+    resources:
+    - name: workers-workerId-benefits
+      path: /workers/{workerId}/benefits
+      operations:
+      - name: getworkerbenefits
+        method: GET
+        description: Workday Integrations Get worker benefit enrollments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATIONS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-benefits-rest
+    port: 8080
+    description: REST adapter for Workday Integrations Workday REST API — Benefits. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/workers/{workerid}/benefits
+      name: workers-workerid-benefits
+      description: REST surface for workers-workerId-benefits.
+      operations:
+      - method: GET
+        name: getworkerbenefits
+        description: Workday Integrations Get worker benefit enrollments
+        call: rest-benefits.getworkerbenefits
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-benefits-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integrations Workday REST API — Benefits. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: workday-integrations-get-worker-benefit
+      description: Workday Integrations Get worker benefit enrollments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-benefits.getworkerbenefits
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integrations Workday Prism Analytics API — Data Upload
+  description: 'Workday Integrations Workday Prism Analytics API — Data Upload. 1 operations. Lead operation: Workday Integrations
+    Upload data to a dataset. Self-contained Naftiko capability covering one Workday Integrations business surface.'
+  tags:
+  - Workday Integrations
+  - Data Upload
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATIONS_API_KEY: WORKDAY_INTEGRATIONS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: prism-analytics-data-upload
+    baseUri: https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
+    description: Workday Integrations Workday Prism Analytics API — Data Upload business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: datasets-datasetId-upload
+      path: /datasets/{datasetId}/upload
+      operations:
+      - name: uploaddatatodataset
+        method: POST
+        description: Workday Integrations Upload data to a dataset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATIONS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: prism-analytics-data-upload-rest
+    port: 8080
+    description: REST adapter for Workday Integrations Workday Prism Analytics API — Data Upload. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/datasets/{datasetid}/upload
+      name: datasets-datasetid-upload
+      description: REST surface for datasets-datasetId-upload.
+      operations:
+      - method: POST
+        name: uploaddatatodataset
+        description: Workday Integrations Upload data to a dataset
+        call: prism-analytics-data-upload.uploaddatatodataset
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: prism-analytics-data-upload-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integrations Workday Prism Analytics API — Data Upload. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: workday-integrations-upload-data-dataset
+      description: Workday Integrations Upload data to a dataset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: prism-analytics-data-upload.uploaddatatodataset
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

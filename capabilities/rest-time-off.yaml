@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workday Integrations Workday REST API — Time Off
+  description: 'Workday Integrations Workday REST API — Time Off. 1 operations. Lead operation: Workday Integrations Get worker
+    time off plans. Self-contained Naftiko capability covering one Workday Integrations business surface.'
+  tags:
+  - Workday Integrations
+  - Time Off
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKDAY_INTEGRATIONS_API_KEY: WORKDAY_INTEGRATIONS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-time-off
+    baseUri: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+    description: Workday Integrations Workday REST API — Time Off business capability. Self-contained, no shared references.
+    resources:
+    - name: workers-workerId-timeOffPlans
+      path: /workers/{workerId}/timeOffPlans
+      operations:
+      - name: getworkertimeoffplans
+        method: GET
+        description: Workday Integrations Get worker time off plans
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKDAY_INTEGRATIONS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-time-off-rest
+    port: 8080
+    description: REST adapter for Workday Integrations Workday REST API — Time Off. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/workers/{workerid}/timeoffplans
+      name: workers-workerid-timeoffplans
+      description: REST surface for workers-workerId-timeOffPlans.
+      operations:
+      - method: GET
+        name: getworkertimeoffplans
+        description: Workday Integrations Get worker time off plans
+        call: rest-time-off.getworkertimeoffplans
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-time-off-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workday Integrations Workday REST API — Time Off. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: workday-integrations-get-worker-time
+      description: Workday Integrations Get worker time off plans
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-time-off.getworkertimeoffplans
+      outputParameters:
+      - type: object
+        mapping: $.
