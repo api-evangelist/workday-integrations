@@ -1,0 +1,278 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integrations Workday Prism Analytics API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integrations List datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}/datasets",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter datasets by name"
+              }
+            ]
+          },
+          "docs": "Retrieve a collection of Prism Analytics datasets available in the tenant. Includes both active and draft datasets."
+        },
+        {
+          "info": {
+            "name": "Workday Integrations Create a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}/datasets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Prism Analytics dataset with a defined schema. The dataset is created in draft status and must have data uploaded before it can be published."
+        },
+        {
+          "info": {
+            "name": "Workday Integrations Get a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}/datasets/:datasetId",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Workday ID of the Prism Analytics dataset"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific Prism Analytics dataset by ID, including its schema, status, and row count."
+        },
+        {
+          "info": {
+            "name": "Workday Integrations Update a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}/datasets/:datasetId",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Workday ID of the Prism Analytics dataset"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the schema or metadata of an existing dataset. Only draft datasets can be modified."
+        },
+        {
+          "info": {
+            "name": "Workday Integrations Delete a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}/datasets/:datasetId",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Workday ID of the Prism Analytics dataset"
+              }
+            ]
+          },
+          "docs": "Delete a Prism Analytics dataset and all associated data."
+        },
+        {
+          "info": {
+            "name": "Workday Integrations Publish a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}/datasets/:datasetId/publish",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Workday ID of the Prism Analytics dataset"
+              }
+            ]
+          },
+          "docs": "Publish a dataset after data has been uploaded. This makes the data available for use in Prism Analytics reports and dashboards. Publishing replaces any previously published data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integrations Upload data to a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}/datasets/:datasetId/upload",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Workday ID of the Prism Analytics dataset"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a data file (CSV or gzipped CSV) to a Prism Analytics dataset. The file is validated against the dataset schema. Multiple files can be uploaded and will be appended to the dataset."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integrations List data tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}/tables",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter tables by name"
+              }
+            ]
+          },
+          "docs": "Retrieve a collection of Prism Analytics data tables available in the tenant, including both Workday-sourced and external data tables."
+        },
+        {
+          "info": {
+            "name": "Workday Integrations Get a data table",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}/tables/:tableId",
+            "params": [
+              {
+                "name": "tableId",
+                "value": "",
+                "type": "path",
+                "description": "Workday ID of the data table"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific data table by ID, including its schema and source information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integrations List data sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}/dataSources",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve available data sources for Prism Analytics, including native Workday data sources and external datasets that can be used in reports."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
