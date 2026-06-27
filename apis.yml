@@ -107,7 +107,7 @@ apis:
       - FN: Workday Support
         email: support@workday.com
 common:
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://community.workday.com/developer
   - type: Authentication Guide
     url: https://doc.workday.com/admin-guide/en-us/integration/integration-security/authentication-overview.html
@@ -137,7 +137,7 @@ common:
     url: json-schema/workday-integrations-compensation-schema.json
   - type: JSONSchema
     url: json-schema/workday-integrations-dataset-schema.json
-  - type: Spectral Rules
+  - type: SpectralRules
     url: rules/workday-integrations-rules.yml
   - type: Vocabulary
     url: vocabulary/workday-integrations-vocabulary.yml
