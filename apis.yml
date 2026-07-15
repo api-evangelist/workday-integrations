@@ -107,6 +107,8 @@ apis:
       - FN: Workday Support
         email: support@workday.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/workday-integrations-agentic-access.yml
   - type: TrustCenter
     url: security/workday-integrations-trust-center.yml
   - type: DomainSecurity
