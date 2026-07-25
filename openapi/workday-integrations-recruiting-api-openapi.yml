@@ -1,0 +1,194 @@
+openapi: 3.1.0
+info:
+  title: Workday Integrations Workday Prism Analytics Benefits Recruiting API
+  description: API for managing external data in Workday Prism Analytics. Enables creation of datasets, uploading of external data files, and management of data tables for advanced reporting and analytics within Workday. Supports loading CSV and Parquet data into Prism for blending with native Workday data sources.
+  version: v2
+  contact:
+    name: Workday Support
+    email: support@workday.com
+    url: https://www.workday.com/en-us/customer-experience/support.html
+  termsOfService: https://www.workday.com/en-us/legal.html
+servers:
+- url: https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
+  description: Workday Prism Analytics Endpoint
+  variables:
+    tenant:
+      default: mycompany
+      description: Workday tenant name
+security:
+- bearerAuth: []
+tags:
+- name: Recruiting
+  description: Manage job requisitions and candidate applications
+paths:
+  /jobRequisitions:
+    get:
+      operationId: listJobRequisitions
+      summary: Workday Integrations List job requisitions
+      description: Retrieve a collection of job requisitions for open positions.
+      tags:
+      - Recruiting
+      parameters:
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: Collection of job requisitions returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/JobRequisition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /jobRequisitions/{jobRequisitionId}:
+    get:
+      operationId: getJobRequisition
+      summary: Workday Integrations Get a job requisition
+      description: Retrieve details of a specific job requisition by ID.
+      tags:
+      - Recruiting
+      parameters:
+      - name: jobRequisitionId
+        in: path
+        required: true
+        description: Workday ID of the job requisition
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Job requisition details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobRequisition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    search:
+      name: search
+      in: query
+      description: Search string to filter results
+      schema:
+        type: string
+    offset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    Reference:
+      type: object
+      description: A reference to a Workday business object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the referenced object
+        descriptor:
+          type: string
+          description: Display name of the referenced object
+        href:
+          type: string
+          format: uri
+          description: API URL for the referenced resource
+    JobRequisition:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the job requisition
+        descriptor:
+          type: string
+          description: Display name of the job requisition
+        requisitionNumber:
+          type: string
+          description: Requisition number
+        status:
+          type: string
+          enum:
+          - Open
+          - Filled
+          - Closed
+          - Frozen
+          description: Current status of the requisition
+        jobProfile:
+          $ref: '#/components/schemas/Reference'
+        supervisoryOrganization:
+          $ref: '#/components/schemas/Reference'
+        location:
+          $ref: '#/components/schemas/Reference'
+        numberOfOpenings:
+          type: integer
+          description: Number of open positions for this requisition
+        targetHireDate:
+          type: string
+          format: date
+          description: Target date for filling the position
+        createdDate:
+          type: string
+          format: date
+          description: Date the requisition was created
+        hiringManager:
+          $ref: '#/components/schemas/Reference'
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Requested resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained via Workday authentication for Prism Analytics API access.
+externalDocs:
+  description: Workday Prism Analytics API Documentation
+  url: https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html

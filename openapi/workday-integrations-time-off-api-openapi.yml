@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: Workday Integrations Workday Prism Analytics Benefits Time Off API
+  description: API for managing external data in Workday Prism Analytics. Enables creation of datasets, uploading of external data files, and management of data tables for advanced reporting and analytics within Workday. Supports loading CSV and Parquet data into Prism for blending with native Workday data sources.
+  version: v2
+  contact:
+    name: Workday Support
+    email: support@workday.com
+    url: https://www.workday.com/en-us/customer-experience/support.html
+  termsOfService: https://www.workday.com/en-us/legal.html
+servers:
+- url: https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
+  description: Workday Prism Analytics Endpoint
+  variables:
+    tenant:
+      default: mycompany
+      description: Workday tenant name
+security:
+- bearerAuth: []
+tags:
+- name: Time Off
+  description: Manage time off requests and balances
+paths:
+  /workers/{workerId}/timeOffPlans:
+    get:
+      operationId: getWorkerTimeOffPlans
+      summary: Workday Integrations Get worker time off plans
+      description: Retrieve time off plans and balances for a specific worker, including accrued, used, and available balances.
+      tags:
+      - Time Off
+      parameters:
+      - $ref: '#/components/parameters/workerId'
+      responses:
+        '200':
+          description: Time off plans returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TimeOffPlan'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Human-readable error message
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    TimeOffPlan:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Time off plan identifier
+        timeOffPlan:
+          $ref: '#/components/schemas/Reference'
+        balance:
+          type: number
+          format: double
+          description: Current available balance
+        accrued:
+          type: number
+          format: double
+          description: Total accrued time
+        used:
+          type: number
+          format: double
+          description: Total used time
+        unit:
+          type: string
+          enum:
+          - Hours
+          - Days
+          description: Unit of measure for the balance
+        asOfDate:
+          type: string
+          format: date
+          description: Date the balance was calculated
+    Reference:
+      type: object
+      description: A reference to a Workday business object
+      properties:
+        id:
+          type: string
+          description: Workday ID of the referenced object
+        descriptor:
+          type: string
+          description: Display name of the referenced object
+        href:
+          type: string
+          format: uri
+          description: API URL for the referenced resource
+  responses:
+    Unauthorized:
+      description: Authentication credentials missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Requested resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    workerId:
+      name: workerId
+      in: path
+      required: true
+      description: Workday ID of the worker
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained via Workday authentication for Prism Analytics API access.
+externalDocs:
+  description: Workday Prism Analytics API Documentation
+  url: https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
