@@ -3,109 +3,565 @@ name: Workday Integrations
 description: >-
   Workday provides cloud-based enterprise software for finance, HR, and planning. This APIs.json file describes the
   integration capabilities and APIs available for connecting Workday with other systems.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/workday-integrations.png
 created: '2025-03-15'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 url: https://raw.githubusercontent.com/api-evangelist/workday-integrations/refs/heads/main/apis.yml
 apis:
-  - name: Workday REST API
-    description: Modern REST API for accessing Workday business objects including employees, organizations, positions, and more.
-    image: https://www.workday.com/content/dam/web/en-us/images/logos/workday-logo.svg
-    humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
-    baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
-    tags:
-      - Enterprise
-      - Finance
-      - HR
-      - REST
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
-      - type: OpenAPI
-        url: https://community.workday.com/sites/default/files/file-hosting/restapi/openapi.json
-      - type: Authentication
-        url: https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
-      - type: RateLimits
-        url: https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
-      - type: OpenAPI
-        url: openapi/workday-integrations-rest-api-openapi.yml
-    contact:
-      - FN: Workday Support
-        email: support@workday.com
-        url: https://www.workday.com/en-us/customer-experience/support.html
-  - name: Workday SOAP Web Services
-    description: >-
-      Comprehensive SOAP-based web services for deep integration with Workday including Human Capital Management,
-      Financial Management, and custom integrations.
-    image: https://www.workday.com/content/dam/web/en-us/images/logos/workday-logo.svg
-    humanURL: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-    baseURL: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
-    tags:
-      - Finance
-      - HCM
-      - Integration
-      - SOAP
-      - Web Services
-    properties:
-      - type: Documentation
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
-      - type: WSDL
-        url: https://community.workday.com/sites/default/files/file-hosting/productionapi/versions.html
-      - type: Authentication
-        url: https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
-      - type: Integration Guide
-        url: https://doc.workday.com/admin-guide/en-us/integration/integration-overview.html
-    contact:
-      - FN: Workday Support
-        email: support@workday.com
-        url: https://www.workday.com/en-us/customer-experience/support.html
-  - name: Workday RaaS (Report-as-a-Service)
-    description: >-
-      Access custom and standard Workday reports as web services, enabling report data to be consumed by external
-      systems.
-    image: https://www.workday.com/content/dam/web/en-us/images/logos/workday-logo.svg
-    humanURL: https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
-    baseURL: https://wd2-impl-services1.workday.com/ccx/service/customreport2/{tenant}
-    tags:
-      - Analytics
-      - Custom Reports
-      - Data Export
-      - Reports
-    properties:
-      - type: Documentation
-        url: https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
-      - type: Tutorial
-        url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
-      - type: Authentication
-        url: https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
-      - type: OpenAPI
-        url: openapi/workday-integrations-raas-openapi.yml
-    contact:
-      - FN: Workday Support
-        email: support@workday.com
-  - name: Workday Prism Analytics API
-    description: API for loading external data into Workday Prism Analytics for advanced reporting and analytics capabilities.
-    image: https://www.workday.com/content/dam/web/en-us/images/logos/workday-logo.svg
-    humanURL: https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
-    baseURL: https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
-    tags:
-      - Analytics
-      - Data Loading
-      - External Data
-      - Prism
-    properties:
-      - type: Documentation
-        url: https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
-      - type: APIReference
-        url: https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
-      - type: Authentication
-        url: https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
-      - type: OpenAPI
-        url: openapi/workday-integrations-prism-analytics-openapi.yml
-    contact:
-      - FN: Workday Support
-        email: support@workday.com
+- name: Workday SOAP Web Services
+  description: >-
+    Comprehensive SOAP-based web services for deep integration with Workday including Human Capital Management,
+    Financial Management, and custom integrations.
+  image: https://www.workday.com/content/dam/web/en-us/images/logos/workday-logo.svg
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/service/{tenant}
+  tags:
+  - Finance
+  - HCM
+  - Integration
+  - SOAP
+  - Web Services
+  properties:
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/productionapi/index.html
+  - type: WSDL
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/productionapi/versions.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Integration Guide
+    url: https://doc.workday.com/admin-guide/en-us/integration/integration-overview.html
+  contact:
+  - FN: Workday Support
+    email: support@workday.com
+    url: https://www.workday.com/en-us/customer-experience/support.html
+- aid: workday-integrations:workday-integrations-benefits-api
+  name: Workday Integrations Benefits API
+  description: Access benefit plans and worker benefit enrollments
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Benefits
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-benefits-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-business-processes-api
+  name: Workday Integrations Business Processes API
+  description: Interact with Workday business process workflows
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Business Processes
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-business-processes-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-compensation-api
+  name: Workday Integrations Compensation API
+  description: Access compensation plans and worker compensation data
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Compensation
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-compensation-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-data-sources-api
+  name: Workday Integrations Data Sources API
+  description: Discover available Workday and external data sources
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Data Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-data-sources-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-data-upload-api
+  name: Workday Integrations Data Upload API
+  description: Upload external data files into datasets
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Data Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-data-upload-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-datasets-api
+  name: Workday Integrations Datasets API
+  description: Manage Prism Analytics dataset definitions
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-job-profiles-api
+  name: Workday Integrations Job Profiles API
+  description: Access job profile definitions and configurations
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Job Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-job-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-organizations-api
+  name: Workday Integrations Organizations API
+  description: Retrieve and manage organizational structures and hierarchies
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-payroll-api
+  name: Workday Integrations Payroll API
+  description: Access payroll data and pay group configurations
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Payroll
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-payroll-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-positions-api
+  name: Workday Integrations Positions API
+  description: Manage position records and staffing
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Positions
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-positions-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-recruiting-api
+  name: Workday Integrations Recruiting API
+  description: Manage job requisitions and candidate applications
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Recruiting
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-recruiting-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-report-metadata-api
+  name: Workday Integrations Report Metadata API
+  description: Retrieve report field definitions and filter parameters
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Report Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-report-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-reports-api
+  name: Workday Integrations Reports API
+  description: Access custom and standard Workday reports
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-reports-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-tables-api
+  name: Workday Integrations Tables API
+  description: Manage data tables derived from datasets
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Tables
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-tables-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-time-off-api
+  name: Workday Integrations Time Off API
+  description: Manage time off requests and balances
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Time Off
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-time-off-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
+- aid: workday-integrations:workday-integrations-workers-api
+  name: Workday Integrations Workers API
+  description: Access and manage worker records including employees and contingent workers
+  humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
+  tags:
+  - Workers
+  properties:
+  - type: OpenAPI
+    url: openapi/workday-integrations-workers-api-openapi.yml
+  - type: Documentation
+    url: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-authentication.html
+  - type: RateLimits
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-rest-api/workday-rest-api-rate-limiting.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
+  - type: Tutorial
+    url: https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/CIe8xMH~H~b1Cq7IqRfGHQ
+  - type: Authentication
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/integration/web-services/web-services-authentication.html
+  - type: Documentation
+    url: >-
+      https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  - type: APIReference
+    url: >-
+      https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
 common:
   - type: AgenticAccess
     url: agentic-access/workday-integrations-agentic-access.yml
