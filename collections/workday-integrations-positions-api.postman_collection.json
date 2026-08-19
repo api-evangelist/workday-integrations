@@ -1,0 +1,461 @@
+{
+  "item": [
+    {
+      "id": "aa1c14af-6cd5-4fd9-b3ad-791b943c754d",
+      "name": "Positions",
+      "description": {
+        "content": "Manage position records and staffing",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "593eead9-faba-4641-a3f3-736586a44a1a",
+          "name": "Workday Integrations List positions",
+          "request": {
+            "name": "Workday Integrations List positions",
+            "description": {
+              "content": "Retrieve a collection of position records, including filled and unfilled positions with their associated job profiles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "positions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of results to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search string to filter results"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Workday tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b885c012-5927-4924-a4c2-e9ea5960f3e6",
+              "name": "Collection of positions returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1033,\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"descriptor\": \"string\",\n      \"positionId\": \"string\",\n      \"isFilled\": false,\n      \"worker\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://TebCWmuSViKhyNHbhLxYohIUixTViql.hiQk4YW-Il+t+Uy4VPYahBIiyBSmH-zrARNnB.02P-szaRif64j\"\n      },\n      \"jobProfile\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://jPVWVZTnjJxXTZnremrfmEJBlmB.luwYfEKrDy78muYBRihOL6IqQFDuKqfR\"\n      },\n      \"supervisoryOrganization\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://vzgzskXhs.bqPKBQdz+T8egJE6ETEIiSFhloXz,.\"\n      },\n      \"location\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://HJmMVVBkwe.syLViWB7FaoJSXK.OLgK19BTyC00eosBaQ+wleaKq6O6tlf\"\n      },\n      \"availableDate\": \"1993-11-03\"\n    },\n    {\n      \"id\": \"string\",\n      \"descriptor\": \"string\",\n      \"positionId\": \"string\",\n      \"isFilled\": true,\n      \"worker\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://BrFX.gousrDx1QWPZvhm\"\n      },\n      \"jobProfile\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://aaavroELrkKlMPujDPpOzeFyQ.uxnkaPWdGY6,RDAXTm3NokPp102.PFp5DJTCL5,li07PD4igmpi8vB2kJMuXLzv9czkcI\"\n      },\n      \"supervisoryOrganization\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://WamOxKrerEEHilIHFmbutaQUlq.eveyb3kfnYCQl7xEQDMoCnzGnTVLU2kCk2Sqxlo0y9WnBTkitAa9f\"\n      },\n      \"location\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://QbhJJLkkOemeliZroRV.beqbhKX+Lj6H7hEC1.MO7e8hxdD0COCmOZc1T9Ban85dJG1btUm6xo4N\"\n      },\n      \"availableDate\": \"1964-10-02\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cc936c9-ec4b-442e-a493-136c611b1020",
+              "name": "Authentication credentials missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a52d1525-e568-451c-9fd8-4a80b920f7bc",
+          "name": "Workday Integrations Get a position",
+          "request": {
+            "name": "Workday Integrations Get a position",
+            "description": {
+              "content": "Retrieve details of a specific position by ID, including the assigned worker and job profile.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "positions",
+                ":positionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "positionId",
+                  "description": "(Required) Workday ID of the position"
+                },
+                {
+                  "description": "Workday tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8cefec1-4010-47a9-b3bb-7a9ea009ddcc",
+              "name": "Position details returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    ":positionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "positionId",
+                      "description": "(Required) Workday ID of the position"
+                    },
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"descriptor\": \"string\",\n  \"positionId\": \"string\",\n  \"isFilled\": false,\n  \"worker\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\",\n    \"href\": \"http://ZJeZHvFiLfK.jgvkOMyKZwpV2mGT,5OImQIkxFHx4fmq5r14n\"\n  },\n  \"jobProfile\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\",\n    \"href\": \"https://BDxjKZptACNPIdUdn.bcxxquxUTpOag.Tq9GucBYkf2,aCcexzeD17n2TvWscFeBipygatgcVL1hJsSbZMHkQNDk7p3D-il\"\n  },\n  \"supervisoryOrganization\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\",\n    \"href\": \"https://JpUodBhrNujkwMxYjsAuSvs.pvmbAIuZ1FvHtJmP51EMK3kgJ9V+BmL59zu02120UHw1+NnoMdtm5Skg\"\n  },\n  \"location\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\",\n    \"href\": \"https://XbgDsNLUOVthPy.pjgmJiPTJR8qEHBxsKepPkK0WG7YZXif30APv1RJHpe\"\n  },\n  \"availableDate\": \"1974-05-02\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a73059df-3f1f-478a-adb4-2a00651edb70",
+              "name": "Authentication credentials missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    ":positionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "positionId",
+                      "description": "(Required) Workday ID of the position"
+                    },
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ceafa31-61a2-434f-bd84-2c5b53a74aab",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    ":positionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "positionId",
+                      "description": "(Required) Workday ID of the position"
+                    },
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Workday tenant name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mycompany",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{{tenant}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "54280c74-eb6e-4c3b-80fc-efdd99f72725",
+    "name": "Workday Integrations Workday Prism Analytics Benefits Positions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing external data in Workday Prism Analytics. Enables creation of datasets, uploading of external data files, and management of data tables for advanced reporting and analytics within Workday. Supports loading CSV and Parquet data into Prism for blending with native Workday data sources.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+      "type": "text/plain"
+    }
+  }
+}

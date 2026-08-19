@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integrations Workday Prism Analytics Benefits Compensation API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Compensation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integrations Get worker compensation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}/workers/:workerId/compensation",
+            "params": [
+              {
+                "name": "workerId",
+                "value": "",
+                "type": "path",
+                "description": "Workday ID of the worker"
+              }
+            ]
+          },
+          "docs": "Retrieve compensation details for a specific worker, including base pay, allowances, bonuses, and total compensation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

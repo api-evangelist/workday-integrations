@@ -1,0 +1,278 @@
+{
+  "item": [
+    {
+      "id": "a4bf9ea5-4e35-4aa1-b26a-e02fef0f51aa",
+      "name": "Benefits",
+      "description": {
+        "content": "Access benefit plans and worker benefit enrollments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "20083a49-143f-4e4b-bba3-074e60c8406c",
+          "name": "Workday Integrations Get worker benefit enrollments",
+          "request": {
+            "name": "Workday Integrations Get worker benefit enrollments",
+            "description": {
+              "content": "Retrieve benefit enrollment details for a specific worker, including health, dental, vision, life insurance, and retirement plans.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "workers",
+                ":workerId",
+                "benefits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workerId",
+                  "description": "(Required) Workday ID of the worker"
+                },
+                {
+                  "description": "Workday tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ec09055-5144-46f2-9d7a-7931aded0044",
+              "name": "Benefit enrollments returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workers",
+                    ":workerId",
+                    "benefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workerId",
+                      "description": "(Required) Workday ID of the worker"
+                    },
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 1666,\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"benefitPlan\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://TMdMMCTcPCTHJStDCayFJnxoKuaRI.nvbn6yt6gV5crFYMgN8Y.JcrdICqieirNb1IIR5NCuE0I6pQStlO\"\n      },\n      \"coverageLevel\": \"string\",\n      \"coverageBeginDate\": \"2018-06-02\",\n      \"coverageEndDate\": \"1964-07-17\",\n      \"employeeCost\": 6046.928265677668,\n      \"employerCost\": 6065.358030804736,\n      \"currency\": \"string\",\n      \"dependents\": [\n        {\n          \"name\": \"string\",\n          \"relationship\": \"string\",\n          \"dateOfBirth\": \"2014-03-26\"\n        },\n        {\n          \"name\": \"string\",\n          \"relationship\": \"string\",\n          \"dateOfBirth\": \"1980-10-21\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"benefitPlan\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://qjQpXTUQzb.eaKHIFHIa1V\"\n      },\n      \"coverageLevel\": \"string\",\n      \"coverageBeginDate\": \"2017-12-26\",\n      \"coverageEndDate\": \"1967-02-20\",\n      \"employeeCost\": 3390.555407232654,\n      \"employerCost\": 1021.2047006974278,\n      \"currency\": \"string\",\n      \"dependents\": [\n        {\n          \"name\": \"string\",\n          \"relationship\": \"string\",\n          \"dateOfBirth\": \"2003-12-10\"\n        },\n        {\n          \"name\": \"string\",\n          \"relationship\": \"string\",\n          \"dateOfBirth\": \"1971-11-13\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "991a0638-f7fb-4099-8df1-08070ec7e4ed",
+              "name": "Authentication credentials missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workers",
+                    ":workerId",
+                    "benefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workerId",
+                      "description": "(Required) Workday ID of the worker"
+                    },
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d034e827-a68b-4fa3-b15c-5e490716de0d",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workers",
+                    ":workerId",
+                    "benefits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workerId",
+                      "description": "(Required) Workday ID of the worker"
+                    },
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Workday tenant name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mycompany",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{{tenant}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "64009ce8-f5bd-4c67-8077-8624453e012f",
+    "name": "Workday Integrations Workday Prism Analytics Benefits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing external data in Workday Prism Analytics. Enables creation of datasets, uploading of external data files, and management of data tables for advanced reporting and analytics within Workday. Supports loading CSV and Parquet data into Prism for blending with native Workday data sources.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+      "type": "text/plain"
+    }
+  }
+}

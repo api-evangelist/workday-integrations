@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workday Integrations Workday Prism Analytics Benefits Data Upload API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workday Integrations Upload data to a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}/datasets/:datasetId/upload",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Workday ID of the Prism Analytics dataset"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a data file (CSV or gzipped CSV) to a Prism Analytics dataset. The file is validated against the dataset schema. Multiple files can be uploaded and will be appended to the dataset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,461 @@
+{
+  "item": [
+    {
+      "id": "f7b0ce80-1c1e-45d6-b4c8-c2b5aa23dc30",
+      "name": "Business Processes",
+      "description": {
+        "content": "Interact with Workday business process workflows",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "92dec148-3312-42aa-be64-9f920724bdee",
+          "name": "Workday Integrations List business processes",
+          "request": {
+            "name": "Workday Integrations List business processes",
+            "description": {
+              "content": "Retrieve active business process instances, including approval workflows and their current status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "businessProcesses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of results to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by process status"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Workday tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f636dad-c651-4f4c-8e76-f63e1e000367",
+              "name": "Collection of business processes returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "businessProcesses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2368,\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"descriptor\": \"string\",\n      \"businessProcessType\": \"string\",\n      \"status\": \"Completed\",\n      \"initiatedDate\": \"2009-12-14T22:51:05.826Z\",\n      \"completedDate\": \"2003-11-13T10:01:09.082Z\",\n      \"initiator\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://CVeMqOfANQwSPRcAizFonkaWDFgTg.vwofJu2+C4LqnbPIJm5JFP,abmcZefIzPSLhAFI\"\n      },\n      \"subject\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://rWjoupAjYwpUXtCd.jupyguKtb5G65uQCRRCERHHPlKwlTpgeEqLVSwDFBXg3HXBnXWg\"\n      },\n      \"currentStep\": \"string\",\n      \"steps\": [\n        {\n          \"stepName\": \"string\",\n          \"status\": \"string\",\n          \"assignedTo\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\",\n            \"href\": \"http://dGtXLUbSTXbiXrLzG.brjn5q6DJ+hY7ZGQOqKUuO6-LamEh+knD\"\n          },\n          \"completedDate\": \"2024-01-27T10:26:18.030Z\"\n        },\n        {\n          \"stepName\": \"string\",\n          \"status\": \"string\",\n          \"assignedTo\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\",\n            \"href\": \"https://rMlDdfWvqkabm.ytzuGlD6Hg,ak-EEcsqP4BlYxHsMrjfW5iqEYm\"\n          },\n          \"completedDate\": \"1995-10-03T17:31:12.941Z\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"descriptor\": \"string\",\n      \"businessProcessType\": \"string\",\n      \"status\": \"InProgress\",\n      \"initiatedDate\": \"2003-06-03T12:39:01.853Z\",\n      \"completedDate\": \"2003-12-12T09:03:01.610Z\",\n      \"initiator\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://NMAruqUBBiYEMQdV.ntiF+zUdlE9D+hr.HsSgaA7Q4CrK+tIf\"\n      },\n      \"subject\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://ulA.yza2l-oti5GGfjMHqRkUKikCUlzAD.dKgMTmIflhMq5TJLT0qU-fXWWsYPl-B.bZMXJhr\"\n      },\n      \"currentStep\": \"string\",\n      \"steps\": [\n        {\n          \"stepName\": \"string\",\n          \"status\": \"string\",\n          \"assignedTo\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\",\n            \"href\": \"http://pYFeyHzZrharrvQXkDyJuCUrAaRlo.tmlzrIi8czajE2agQ1,CpDN+DY07\"\n          },\n          \"completedDate\": \"1962-08-14T00:35:57.835Z\"\n        },\n        {\n          \"stepName\": \"string\",\n          \"status\": \"string\",\n          \"assignedTo\": {\n            \"id\": \"string\",\n            \"descriptor\": \"string\",\n            \"href\": \"https://PdNS.gaJ4sHIx6F,LYFMB,CaDqTJqVyNeQl-e97JzFr8Or-b.rneR9T5soUShHDrdC1yyeYXiKXjL0NQjQWeb\"\n          },\n          \"completedDate\": \"1980-01-22T01:15:14.787Z\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "811135a3-3f81-4eb2-a92d-1ee9ea7fc829",
+              "name": "Authentication credentials missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "businessProcesses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "225dc7db-1f84-4af4-85b1-8ea9426f8204",
+          "name": "Workday Integrations Get a business process",
+          "request": {
+            "name": "Workday Integrations Get a business process",
+            "description": {
+              "content": "Retrieve details and current status of a specific business process instance by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "businessProcesses",
+                ":processId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "processId",
+                  "description": "(Required) Workday ID of the business process instance"
+                },
+                {
+                  "description": "Workday tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "095ebc3f-d88e-4940-9ef5-99d421e14db0",
+              "name": "Business process details returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "businessProcesses",
+                    ":processId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "processId",
+                      "description": "(Required) Workday ID of the business process instance"
+                    },
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"descriptor\": \"string\",\n  \"businessProcessType\": \"string\",\n  \"status\": \"Denied\",\n  \"initiatedDate\": \"1973-02-03T05:22:49.375Z\",\n  \"completedDate\": \"1971-10-22T07:54:26.584Z\",\n  \"initiator\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\",\n    \"href\": \"https://rTcqxyCySa.veSMKtxQyAKGq55\"\n  },\n  \"subject\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\",\n    \"href\": \"https://CWrEDCTcjLwZMlyyK.vgDZmRvY4Klg9Ceuc+\"\n  },\n  \"currentStep\": \"string\",\n  \"steps\": [\n    {\n      \"stepName\": \"string\",\n      \"status\": \"string\",\n      \"assignedTo\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://mCxHUCkkJ.buhobsH1I9gqKVxCGjDwCvqIkv-vIIrqkKiw\"\n      },\n      \"completedDate\": \"2020-12-21T11:36:56.673Z\"\n    },\n    {\n      \"stepName\": \"string\",\n      \"status\": \"string\",\n      \"assignedTo\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://ueytVnsIEKthuXRhtRY.yfgmMuoQ3WnPZ2WMp2vs-UQOM4MoTeZDuvtmOPfTJ+adiAdvQ9OgnDZup9OVmHUtEhXUZundmeug\"\n      },\n      \"completedDate\": \"1980-03-12T22:39:31.679Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a01f762-56f3-4d98-ae1a-bc64ffc9ae05",
+              "name": "Authentication credentials missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "businessProcesses",
+                    ":processId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "processId",
+                      "description": "(Required) Workday ID of the business process instance"
+                    },
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd5d7042-ebf6-4b87-9c94-62aaf70bd7ac",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "businessProcesses",
+                    ":processId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "processId",
+                      "description": "(Required) Workday ID of the business process instance"
+                    },
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Workday tenant name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mycompany",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{{tenant}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f3d5b316-0449-4e82-97e4-85428196dccc",
+    "name": "Workday Integrations Workday Prism Analytics Benefits Business Processes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing external data in Workday Prism Analytics. Enables creation of datasets, uploading of external data files, and management of data tables for advanced reporting and analytics within Workday. Supports loading CSV and Parquet data into Prism for blending with native Workday data sources.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+      "type": "text/plain"
+    }
+  }
+}

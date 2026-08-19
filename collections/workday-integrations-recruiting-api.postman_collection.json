@@ -1,0 +1,461 @@
+{
+  "item": [
+    {
+      "id": "24742395-201f-4f66-a348-ff079a8f2249",
+      "name": "Recruiting",
+      "description": {
+        "content": "Manage job requisitions and candidate applications",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "263fd3ea-112c-4a21-a984-89a890c62230",
+          "name": "Workday Integrations List job requisitions",
+          "request": {
+            "name": "Workday Integrations List job requisitions",
+            "description": {
+              "content": "Retrieve a collection of job requisitions for open positions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobRequisitions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of results to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search string to filter results"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Workday tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb243d34-de66-4605-ba08-128b31c0649b",
+              "name": "Collection of job requisitions returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobRequisitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 9274,\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"descriptor\": \"string\",\n      \"requisitionNumber\": \"string\",\n      \"status\": \"Closed\",\n      \"jobProfile\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://TjSGDNjrBkDYcwiRHqEQIzmU.jmxQuwLqXpqFZXHodi-qKsfu5tvkg4gQApVEDyO.XXwPCNR+9NwkZXmVuQC,1T90QKL5,Pxm\"\n      },\n      \"supervisoryOrganization\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://jniCsKnoiKYsFWqQVFWVAmcg.bcYK3lQjDTfmoSJ8osU02b6Mht5UgOk9L6iWagp7eJ-bVBz42plhXGiLReJQeB658Rc8WYF9rBMI\"\n      },\n      \"location\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://rhZaqHPxho.ewnwy-HR.8SanUyHTfybcv+,nhdUjbFLitGM4hfOuai\"\n      },\n      \"numberOfOpenings\": 6756,\n      \"targetHireDate\": \"2010-12-08\",\n      \"createdDate\": \"1961-02-12\",\n      \"hiringManager\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://hmLKXBSgEQvZJqGwJEABZEG.mbvwyoc7ATPNHL2i+AwiTlyb0V,SXVfbDphWzPqDhX1Zk3oA948ZkMGonlwzxag-hH3my\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"descriptor\": \"string\",\n      \"requisitionNumber\": \"string\",\n      \"status\": \"Open\",\n      \"jobProfile\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://kNQklXXGRXGkaiGzKpGbMPdM.ddEz2li6gmZhDYu51q9dq+hreCXqCpFdQf5yF3uP\"\n      },\n      \"supervisoryOrganization\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://obFe.klpDXZ7Edi0L0I8ES36mI\"\n      },\n      \"location\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"https://UBZgcx.rcqfzbBMBwma\"\n      },\n      \"numberOfOpenings\": 6647,\n      \"targetHireDate\": \"1987-01-22\",\n      \"createdDate\": \"2006-11-26\",\n      \"hiringManager\": {\n        \"id\": \"string\",\n        \"descriptor\": \"string\",\n        \"href\": \"http://EJGbHMvpLMPjjkOWvWpjpau.knfSMs\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbf5622c-5fa6-414d-b5fc-b6bc71914cb3",
+              "name": "Authentication credentials missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobRequisitions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95db2ff4-6748-4ae9-bb87-77421cd41d0a",
+          "name": "Workday Integrations Get a job requisition",
+          "request": {
+            "name": "Workday Integrations Get a job requisition",
+            "description": {
+              "content": "Retrieve details of a specific job requisition by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobRequisitions",
+                ":jobRequisitionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobRequisitionId",
+                  "description": "(Required) Workday ID of the job requisition"
+                },
+                {
+                  "description": "Workday tenant name",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0218a448-921e-4d54-8084-14bef327bdc9",
+              "name": "Job requisition details returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobRequisitions",
+                    ":jobRequisitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobRequisitionId",
+                      "description": "(Required) Workday ID of the job requisition"
+                    },
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"descriptor\": \"string\",\n  \"requisitionNumber\": \"string\",\n  \"status\": \"Frozen\",\n  \"jobProfile\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\",\n    \"href\": \"https://HHdCblvvRYTwnkSuHVe.qbhNFKtimMOQ+bJ4F6FKOSZ7M4zTacLenrDG1L3uAHX,aGNiUikXDaQck+cLZ4AfiB-ly8\"\n  },\n  \"supervisoryOrganization\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\",\n    \"href\": \"http://OL.ksxD4a6r3miScLB2Vup7pYg-I\"\n  },\n  \"location\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\",\n    \"href\": \"https://kNztJhYwotZLspD.nazXIKmMrdI\"\n  },\n  \"numberOfOpenings\": 9571,\n  \"targetHireDate\": \"1963-08-11\",\n  \"createdDate\": \"2014-01-13\",\n  \"hiringManager\": {\n    \"id\": \"string\",\n    \"descriptor\": \"string\",\n    \"href\": \"http://mYLzDQrSWzQSXHY.kbBwg2RNla3KUMsFT,dW7tgloxooX5FpuzcUzVWuXNb8QyEi0JD10moiNMuLqXC.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f9f598f-a6b9-452f-b647-62194478297a",
+              "name": "Authentication credentials missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobRequisitions",
+                    ":jobRequisitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobRequisitionId",
+                      "description": "(Required) Workday ID of the job requisition"
+                    },
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d0a1f62-a48a-4508-9926-8f02b886781c",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobRequisitions",
+                    ":jobRequisitionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobRequisitionId",
+                      "description": "(Required) Workday ID of the job requisition"
+                    },
+                    {
+                      "description": "Workday tenant name",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Workday tenant name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mycompany",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{{tenant}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "af92e572-5475-42db-aa68-994d573593e5",
+    "name": "Workday Integrations Workday Prism Analytics Benefits Recruiting API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing external data in Workday Prism Analytics. Enables creation of datasets, uploading of external data files, and management of data tables for advanced reporting and analytics within Workday. Supports loading CSV and Parquet data into Prism for blending with native Workday data sources.\n\nContact Support:\n Name: Workday Support\n Email: support@workday.com",
+      "type": "text/plain"
+    }
+  }
+}
