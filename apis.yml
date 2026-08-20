@@ -280,6 +280,8 @@ apis:
   humanURL: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html
   baseURL: https://wd2-impl-services1.workday.com/ccx/api/v1/{tenant}
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
