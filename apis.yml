@@ -3,6 +3,18 @@ name: Workday Integrations
 description: >-
   Workday provides cloud-based enterprise software for finance, HR, and planning. This APIs.json file describes the
   integration capabilities and APIs available for connecting Workday with other systems.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
