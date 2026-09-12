@@ -578,6 +578,8 @@ apis:
     url: >-
       https://community.workday.com/sites/default/files/file-hosting/prism-analytics-api/index.html
 common:
+  - type: Website
+    url: https://www.workday.com/
   - type: AgenticAccess
     url: agentic-access/workday-integrations-agentic-access.yml
   - type: TrustCenter
