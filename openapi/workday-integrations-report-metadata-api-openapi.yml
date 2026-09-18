@@ -1,21 +1,22 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workday Integrations Workday Prism Analytics Benefits Report Metadata API
-  description: API for managing external data in Workday Prism Analytics. Enables creation of datasets, uploading of external data files, and management of data tables for advanced reporting and analytics within Workday. Supports loading CSV and Parquet data into Prism for blending with native Workday data sources.
-  version: v2
+  title: Workday Integrations Workday Report-as-a-Service (RaaS)…
+  description: API for accessing Workday custom and standard reports as RESTful web services. Enables external systems to consume report data in JSON, CSV, or XML formats. Reports must be configured with web service enabled in Workday before they can be accessed through this API.
+  version: v1
   contact:
     name: Workday Support
     email: support@workday.com
     url: https://www.workday.com/en-us/customer-experience/support.html
   termsOfService: https://www.workday.com/en-us/legal.html
 servers:
-- url: https://wd2-impl-services1.workday.com/ccx/api/prismAnalytics/v2/{tenant}
-  description: Workday Prism Analytics Endpoint
+- url: https://wd2-impl-services1.workday.com/ccx/service/customreport2/{tenant}
+  description: Workday Custom Reports Endpoint
   variables:
     tenant:
       default: mycompany
       description: Workday tenant name
 security:
+- basicAuth: []
 - bearerAuth: []
 tags:
 - name: Report Metadata
@@ -97,11 +98,15 @@ components:
                 type: string
                 description: Default value for the prompt
   securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using Workday integration system user credentials (ISU username and password).
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: OAuth 2.0 bearer token obtained via Workday authentication for Prism Analytics API access.
+      description: OAuth 2.0 bearer token for report access
 externalDocs:
-  description: Workday Prism Analytics API Documentation
-  url: https://doc.workday.com/admin-guide/en-us/workday-prism-analytics/workday-prism-analytics-api.html
+  description: Workday RaaS Documentation
+  url: https://doc.workday.com/admin-guide/en-us/integration/workday-reports/report-as-a-service-raas.html
